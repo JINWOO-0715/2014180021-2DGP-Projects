@@ -18,9 +18,9 @@ open_canvas()
 #monster_plant size 40*28
 #monster_sheep size 221*42 /
 
-
+bullet_one = load_image('bullet_level_1.png') #32 32
 grass = load_image('grass.png')
-character = load_image('monster_sheep.png')
+character = load_image('main_charecter.png')
 coin = load_image('coin.png')
 monster_bear = load_image('monster_bear.png')
 
@@ -41,6 +41,13 @@ def handle_events():
     global sign_move
     global dir_charecter_x
     global dir_charecter_y
+    global dir_bullet_x
+    global dir_bullet_y
+    global bullet_y
+    global bullet_x
+    global character_x
+    global character_y
+    global bullet_xy
 
     events = get_events()
     for event in events:
@@ -55,6 +62,12 @@ def handle_events():
                 dir_charecter_y +=1
             elif event.key == SDLK_DOWN:
                 dir_charecter_y -=1
+            elif event.key ==SDLK_SPACE:
+                bullet_x = character_x
+                bullet_y = character_y
+                bullet_xy.append([bullet_x,bullet_y])
+
+
 
 
         elif event.type == SDL_KEYUP:
@@ -66,31 +79,39 @@ def handle_events():
                 dir_charecter_y -= 1
             elif event.key == SDLK_DOWN:
                 dir_charecter_y += 1
+            elif event.key == SDLK_SPACE:
+                sign_bullet = False
 
 
-
-sign_move = True
+bullet_xy =[]
 c_frame =0
-coin_frame =0
-x = 0
-y=40
+character_x = 0
+character_y=40
+bullet_x = 0
+bullet_y= 0
 dir_charecter_x =0
 dir_charecter_y =0
+dir_bullet_x =100
+dir_bullet_y =100
 
-draw_bullet_1 = False
-
-while sign_move:
+#촐알을 30발 준비 한다  총알 카운트 한다 0~29까지
+count = 0
+while True:
     clear_canvas()
-    Move_right()
-    character.clip_draw(c_frame*45,0,45,60,x,y) # 캐릭터 사이즈 35 50 애니 6장
-    coin.clip_draw(coin_frame * 23, 0, 23, 40, x, y)  # 캐릭터 사이즈 35 50 애니 6장
-    delay(0.1)
-    update_canvas()
+    character.clip_draw(c_frame*45,0,45,60,character_x,character_y) # 캐릭터 사이즈 35 50 애니 6장
     handle_events()
     c_frame = (c_frame +1)%1
-    coin_frame = (coin_frame +1)%6
-    x += dir_charecter_x * 5
-    y += dir_charecter_y * 5
+    character_x += dir_charecter_x * 5
+    character_y += dir_charecter_y * 5
+    if(len(bullet_xy)!=0):
+        for i ,bxy in enumerate(bullet_xy):
+            bxy[0] += 15
+            bullet_xy[i][0] = bxy[0]
+            bullet_one.clip_draw(0,0,15,15,bxy[0],bxy[1])
+            if bxy[0]>=800:
+                bullet_xy.remove(bxy)
+    update_canvas()
+
     delay(0.01)
 
 

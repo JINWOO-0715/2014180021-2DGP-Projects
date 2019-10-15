@@ -18,7 +18,9 @@ open_canvas()
 #monster_plant size 40*28
 #monster_sheep size 221*42 /
 
-bullet_one = load_image('bullet_level_1.png') #32 32
+bullet_one = load_image('bullet_level_1.png') #
+bullet_two = load_image('bullet_level_2.png') #
+
 grass = load_image('grass.png')
 character = load_image('main_charecter.png')
 coin = load_image('coin.png')
@@ -93,8 +95,8 @@ dir_charecter_x =0
 dir_charecter_y =0
 dir_bullet_x =100
 dir_bullet_y =100
+bullet_power=2
 
-#촐알을 30발 준비 한다  총알 카운트 한다 0~29까지
 count = 0
 while True:
     clear_canvas()
@@ -105,9 +107,12 @@ while True:
     character_y += dir_charecter_y * 5
     if(len(bullet_xy)!=0):
         for i ,bxy in enumerate(bullet_xy):
-            bxy[0] += 15
+            bxy[0] += 10
             bullet_xy[i][0] = bxy[0]
-            bullet_one.clip_draw(0,0,15,15,bxy[0],bxy[1])
+            if bullet_power==1:
+                bullet_one.clip_draw(0,0,30,30,bxy[0],bxy[1])
+            elif bullet_power==2:
+                bullet_two.clip_draw(0,0,40,30,bxy[0],bxy[1])
             if bxy[0]>=800:
                 bullet_xy.remove(bxy)
     update_canvas()

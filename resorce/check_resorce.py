@@ -1,5 +1,5 @@
 from pico2d import *
-open_canvas()
+
 #boss_monster_mouse_stand size 252 * 58 /4
 #boss_monster_skill size 600*74 /10
 #main_charcter size 90 * 46 / 2
@@ -17,15 +17,17 @@ open_canvas()
 #monster_mouse size 209*34 /3
 #monster_plant size 40*28
 #monster_sheep size 221*42 /
+KPU_WIDTH, KPU_HEIGHT = 1280, 720
 
-bullet_one = load_image('bullet_level_1.png') #
-bullet_two = load_image('bullet_level_2.png') #
+open_canvas(KPU_WIDTH,KPU_HEIGHT)
+bullet_one = load_image('bullet_level_1.png')
+bullet_two = load_image('bullet_level_2.png')
 
 grass = load_image('grass.png')
 character = load_image('main_charecter.png')
 coin = load_image('coin.png')
 monster_bear = load_image('monster_bear.png')
-
+ground_image = load_image('123.png')
 def Move_right():
     x,y = 0+25,90
     frame=0
@@ -98,8 +100,10 @@ dir_bullet_y =100
 bullet_power=2
 
 count = 0
+
 while True:
     clear_canvas()
+    ground_image.draw(KPU_WIDTH//2,KPU_HEIGHT//2)
     character.clip_draw(c_frame*45,0,45,60,character_x,character_y) # 캐릭터 사이즈 35 50 애니 6장
     handle_events()
     c_frame = (c_frame +1)%1
@@ -113,8 +117,9 @@ while True:
                 bullet_one.clip_draw(0,0,30,30,bxy[0],bxy[1])
             elif bullet_power==2:
                 bullet_two.clip_draw(0,0,40,30,bxy[0],bxy[1])
-            if bxy[0]>=800:
+            if bxy[0]>=1280:
                 bullet_xy.remove(bxy)
+
     update_canvas()
 
     delay(0.01)

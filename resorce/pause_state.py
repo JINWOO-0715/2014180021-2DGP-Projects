@@ -27,9 +27,8 @@ def handle_events():
 
 def draw():
     clear_canvas()
-    main_state.draw()
     if count <= 20:
-        image.clip_draw(200, 200, 500, 500, 400, 300, 200, 200)
+        image.clip_draw(200, 200, 500, 500,  game_framework.ground_size_w/2, game_framework.ground_size_h/2, game_framework.ground_size_w/2, game_framework.ground_size_h/2)
     update_canvas()
     delay(0.05)
 

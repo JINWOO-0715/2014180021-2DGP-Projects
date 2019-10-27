@@ -40,7 +40,8 @@ class TestGameState:
 
 running = None
 stack = None
-
+ground_size_w = 900
+ground_size_h = 600
 
 def change_state(state):
     global stack
@@ -84,6 +85,7 @@ def quit():
 
 def run(start_state):
     global running, stack
+
     running = True
     stack = [start_state]
     start_state.enter()

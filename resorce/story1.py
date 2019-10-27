@@ -1,19 +1,37 @@
 import game_framework
 from pico2d import *
-import main_state
+import title_state
+import story2
 
-import story1
-name = "title_state"
-image = None
+name = "Storystate"
+story_image_1 = None
+
+
+logo_time = 0.0
 
 
 def enter():
     global image
-    image = load_image('title.png')
+    image = load_image('story1.png')
+
+
 
 def exit():
     global image
     del (image)
+
+
+def update():
+    pass
+
+
+
+def draw():
+    clear_canvas()
+    image.draw(game_framework.ground_size_w/2, game_framework.ground_size_h/2 , game_framework.ground_size_w,game_framework.ground_size_h)
+    update_canvas()
+
+
 
 def handle_events():
     events = get_events()
@@ -24,26 +42,15 @@ def handle_events():
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                game_framework.change_state(story1)
+                game_framework.change_state(story2)
 
 
-def draw():
-    clear_canvas()
-    image.draw(game_framework.ground_size_w/2, game_framework.ground_size_h/2 , game_framework.ground_size_w,game_framework.ground_size_h)
-    update_canvas()
-
-def update():
-    pass
 
 
-def pause():
-    pass
+def pause(): pass
 
 
-def resume():
-    pass
-
-
+def resume(): pass
 
 
 

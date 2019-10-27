@@ -29,7 +29,7 @@ def update():
 def draw():
     global image
     clear_canvas()
-    image.draw(640, 360,1280,720)
+    image.draw(game_framework.ground_size_w/2, game_framework.ground_size_h/2,game_framework.ground_size_w, game_framework.ground_size_h)
     update_canvas()
 
 

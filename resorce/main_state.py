@@ -16,7 +16,7 @@ main_chracter = None
 back_ground =None
 font = None
 main_chracter_bullet = None
-
+choice =None
 blue_monster = None
 blue_monsters = None
 
@@ -84,9 +84,11 @@ class Monster():
         self.bullet_time=0
         self.draw_sign = 0
         self.monster_bird_blue =load_image('monster_bird_blue.png')
+        self.monster_dead = load_image('dead.png')
         self.bullet = Monster_bullet()
 
     def set_monster_bird_red(self):
+        global choice
         self.x = game_framework.ground_size_w + 50
         self.y = random.randint(1,6)*100
         self.speed = 3
@@ -99,7 +101,7 @@ class Monster():
 
     def set_monster_bird_yellow(self):
         self.x = game_framework.ground_size_w + 50
-        self.y =random.randint(1,6)*50
+        self.y = random.randint(1,6)*50
         self.speed = 3
         self.frame = 1
         self.draw_time = 0
@@ -141,6 +143,7 @@ class Monster():
 
 
     def update(self):
+        global choice
         self.draw_time +=0.01
         self.bullet_time+=0.01
         if self.draw_time>2:
@@ -149,9 +152,8 @@ class Monster():
             self.bullet_time += 0.01
             self.bullet.update()
             if self.x < 0:
-                choice =random.randint(1,4)
                 if(choice == 1):
-                  self.set_monster_bird_green()
+                    self.set_monster_bird_green()
                 elif choice ==2 :
                     self.set_monster_bird_blue()
                 elif choice == 3:
@@ -162,20 +164,23 @@ class Monster():
 
 class Monster_bullet:
     def __init__(self):
+        global choice
         self.xy = []
         self.image_level_one = load_image('monster_bullet_1.png')
         self.x = 0
         self.y = 0
+        self.t =0
         self.speed =5
         self.target_x=0
         self.target_y=0
-        self.bullet_type = 0
+        self.bullet_type =choice
+        self.time =0
 
     def update(self):
         pass
 
     def draw(self):
-        if self.bullet_type ==0 :
+        if self.bullet_type ==1:
             if (len(self.xy) != 0):
                 for i, bxy in enumerate(self.xy):
                     bxy[0] -= self.speed
@@ -183,24 +188,52 @@ class Monster_bullet:
                     self.image_level_one.clip_draw(0, 0, 20, 20, bxy[0], bxy[1], 30, 30)
                     if bxy[0] <= 0:
                         self.xy.remove(bxy)
-        elif self.bullet_type ==1:  # 왼쪽 위 발사
+        elif self.bullet_type ==2:
             if (len(self.xy) != 0):
+                self.time += 0.1
+                if self.time >= 3:
+                    self.t += 0.005
+                    self.time = 0
+                if self.t ==1:
+                    self.t=0
                 for i, bxy in enumerate(self.xy):
-                    bxy[0] -= self.speed
-                    bxy[1] += self.speed
+                    bxy[0] = (1-self.t)*bxy[0] + self.t*(-1200)
+                    bxy[1] = (1-self.t)*bxy[1] + self.t*(200)
                     self.xy[i][0] = bxy[0]
                     self.image_level_one.clip_draw(0, 0, 20, 20, bxy[0], bxy[1], 30, 30)
                     if bxy[0] <= 0 or bxy[1] >600:
                         self.xy.remove(bxy)
-        elif self.bullet_type == 2:  # 왼쪽 위 발사
+        elif self.bullet_type == 3:
             if (len(self.xy) != 0):
+                self.time += 0.1
+                if self.time >= 3:
+                    self.t += 0.005
+                    self.time = 0
+                if self.t == 1:
+                    self.t = 0
                 for i, bxy in enumerate(self.xy):
-                    bxy[0] -= self.speed
-                    bxy[1] -= self.speed
+                    bxy[0] = (1 - self.t) * bxy[0] + self.t * (-1200)
+                    bxy[1] = (1 - self.t) * bxy[1] + self.t * (100)
                     self.xy[i][0] = bxy[0]
                     self.image_level_one.clip_draw(0, 0, 20, 20, bxy[0], bxy[1], 30, 30)
-                    if bxy[0] <= 0 or bxy[1] < 0:
+                    if bxy[0] <= 0 or bxy[1] > 600:
                         self.xy.remove(bxy)
+        elif self.bullet_type == 4:
+            if (len(self.xy) != 0):
+                self.time += 0.1
+                if self.time >= 3:
+                    self.t += 0.005
+                    self.time = 0
+                if self.t == 1:
+                    self.t = 0
+                for i, bxy in enumerate(self.xy):
+                    bxy[0] = (1 - self.t) * bxy[0] + self.t * (-1200)
+                    bxy[1] = (1 - self.t) * bxy[1] + self.t * (400)
+                    self.xy[i][0] = bxy[0]
+                    self.image_level_one.clip_draw(0, 0, 20, 20, bxy[0], bxy[1], 30, 30)
+                    if bxy[0] <= 0 or bxy[1] > 600:
+                        self.xy.remove(bxy)
+
         elif self.bullet_type == 3:  # 유도탄인데 아직 안된다
             if (len(self.xy) != 0):
                 for i, bxy in enumerate(self.xy):
@@ -280,10 +313,11 @@ def handle_events():
             main_chracter_bullet.y = main_charcter.y
             main_chracter_bullet.xy.append([main_chracter_bullet.x,main_chracter_bullet.y])
 
-
 def update():
+    global choice
     main_charcter.update()
     main_chracter_bullet.update()
+    choice = random.randint(1,4)
     for blue_monster in blue_monsters:
         blue_monster.update()
 

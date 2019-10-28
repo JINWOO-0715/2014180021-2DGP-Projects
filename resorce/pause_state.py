@@ -32,6 +32,11 @@ def handle_events():
             state += 1
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_UP):
             state += 1
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_RETURN):
+            if (state % 2 == 0):
+                game_framework.pop_state()
+            elif (state % 2 == 1):
+                game_framework.quit()
 
 
 
@@ -47,7 +52,7 @@ def draw():
                    game_framework.ground_size_h)
 
     update_canvas()
-    delay(0.05)
+
 
 def update():
     pass

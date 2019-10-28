@@ -6,37 +6,51 @@ import main_state
 
 name = "pause_state"
 image = None
-count = 0
+image_2 =None
+state = 0
 
 def enter():
-    global image
-    image = load_image('pause.png')
+    global image, image_2
+    image = load_image('time_over_3.png')
+    image_2 = load_image('time_over_4.png')
 
 def exit():
-    global image
+    global image ,image_2
     del (image)
+    del (image_2)
 
 def handle_events():
+    global state
     events = get_events()
     for event in events:
-        if event.type == SDL_QUIT:
-            game_framework.quit()
-        else:
-            if (event.type, event.key) == (SDL_KEYDOWN, SDLK_p):
+        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
+            if (state % 2 == 0):
                 game_framework.pop_state()
+            elif (state % 2 == 1):
+                game_framework.quit()
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_DOWN):
+            state += 1
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_UP):
+            state += 1
+
+
+
+
 
 def draw():
     clear_canvas()
-    if count <= 20:
-        image.clip_draw(200, 200, 500, 500,  game_framework.ground_size_w/2, game_framework.ground_size_h/2, game_framework.ground_size_w/2, game_framework.ground_size_h/2)
+    if  state%2==0 :
+        image.draw(game_framework.ground_size_w / 2, game_framework.ground_size_h / 2, game_framework.ground_size_w,
+                   game_framework.ground_size_h)
+    elif state%2==1 :
+        image_2.draw(game_framework.ground_size_w / 2, game_framework.ground_size_h / 2, game_framework.ground_size_w,
+                   game_framework.ground_size_h)
+
     update_canvas()
     delay(0.05)
 
 def update():
-    global count
-    count += 1
-    if count == 40:
-        count = 0
+    pass
 
 
 def pause():

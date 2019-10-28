@@ -173,7 +173,7 @@ class Monster_bullet:
         self.speed =5
         self.target_x=0
         self.target_y=0
-        self.bullet_type =choice
+        self.bullet_type =random.randint(1,4)
         self.time =0
 
     def update(self):
@@ -234,7 +234,7 @@ class Monster_bullet:
                     if bxy[0] <= 0 or bxy[1] > 600:
                         self.xy.remove(bxy)
 
-        elif self.bullet_type == 3:  # 유도탄인데 아직 안된다
+        elif self.bullet_type == 5:  # 유도탄인데 아직 안된다
             if (len(self.xy) != 0):
                 for i, bxy in enumerate(self.xy):
                     if self.target_x < self.x :

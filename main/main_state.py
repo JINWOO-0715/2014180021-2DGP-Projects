@@ -108,7 +108,17 @@ class Monster():
         self.bullet_time=0
         self.draw_time_plus =0.001
         self.draw_sign = 0
-        self.monster_bird_blue =load_image('monster_bird_blue.png')
+        self.monster_bird_blue = None
+        if self.monster_bird_blue ==None:
+            cho = random.randint(1,4)
+            if cho ==1 :
+                self.monster_bird_blue = load_image('monster_bird_red.png')
+            elif cho ==2:
+                self.monster_bird_blue = load_image('monster_bird_yellow.png')
+            elif cho ==3:
+                self.monster_bird_blue = load_image('monster_bird_blue.png')
+            elif cho ==4:
+                self.monster_bird_blue = load_image('monster_bird_green.png')
 
         self.bullet = Monster_bullet()
 
@@ -159,6 +169,7 @@ class Monster():
 
     def draw(self):
         if self.draw_sign ==1:
+
             self.frame = (self.frame + 1) % 1
             self.monster_bird_blue.clip_draw(self.frame*36,0,36,42,self.x,self.y,60,60)
             self.bullet.draw()

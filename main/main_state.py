@@ -58,8 +58,6 @@ class Main_chracter_Bullet:
         self.xy_2 = []
         self.xy_2_2 = []
         self.image_level_one = load_image('bullet_level_1.png')
-        self.image_level_two = load_image('bullet_level_2.png')
-        self.image_level_three = load_image('bullet_level_3.png')
         self.power_level =2
         self.x = 0
         self.y = 0
@@ -103,15 +101,15 @@ class Main_chracter_Bullet:
 class Monster():
     def __init__(self):
         self.x = game_framework.ground_size_w + 50
-        self.y = random.randint(1,9)*50
+        self.y = random.randint(1,18)*50
         self.speed = 2
         self.frame = 1
-        self.draw_time =0
+        self.draw_time =random.randint(1,499)*0.01
         self.bullet_time=0
         self.draw_time_plus =0.001
         self.draw_sign = 0
         self.monster_bird_blue =load_image('monster_bird_blue.png')
-        self.monster_dead = load_image('dead.png')
+
         self.bullet = Monster_bullet()
 
     def set_monster_bird_red(self):
@@ -120,7 +118,7 @@ class Monster():
         self.y = random.randint(1,18)*50
         self.speed = 3
         self.frame = 1
-        self.draw_time = 0
+        self.draw_time =random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
         self.monster_bird_blue = load_image('monster_bird_red.png')
@@ -131,7 +129,7 @@ class Monster():
         self.y = random.randint(1,18)*50
         self.speed = 3
         self.frame = 1
-        self.draw_time = 0
+        self.draw_time =random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
         self.monster_bird_blue = load_image('monster_bird_yellow.png')
@@ -142,7 +140,7 @@ class Monster():
         self.y = random.randint(1,18)*50
         self.speed = 3
         self.frame = 1
-        self.draw_time = 0
+        self.draw_time = random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
         self.monster_bird_blue = load_image('monster_bird_green.png')
@@ -153,7 +151,7 @@ class Monster():
         self.y = random.randint(1,18)*50
         self.speed = 3
         self.frame = 1
-        self.draw_time = 0
+        self.draw_time = random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
         self.monster_bird_blue = load_image('monster_bird_blue.png')
@@ -173,7 +171,7 @@ class Monster():
         global choice
         self.draw_time +=0.01
         self.bullet_time+=0.01
-        if self.draw_time>2:
+        if self.draw_time>5:
             self.x -= self.speed
             self.draw_sign=1
             self.bullet_time += 0.01

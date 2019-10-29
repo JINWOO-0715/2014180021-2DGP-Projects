@@ -41,7 +41,7 @@ class TestGameState:
 running = None
 stack = None
 ground_size_w = 1280
-ground_size_h = 900
+ground_size_h = 850
 
 def change_state(state):
     global stack

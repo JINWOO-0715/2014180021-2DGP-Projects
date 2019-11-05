@@ -1,7 +1,6 @@
 
 from pico2d import *
 
-main_chracter = None
 class Main_charcter:
     def __init__(self):
         self.image = load_image('resorce\\kirby\\main_character.png')
@@ -18,7 +17,7 @@ class Main_charcter:
     def update(self):
         self.x += self.dir_x * 5
         self.y += self.dir_y * 5
-        delay(0.01)
 
     def return_character_point(self):
         return self.x,self.y
+

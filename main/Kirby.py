@@ -3,7 +3,7 @@ from pico2d import *
 
 class Main_charcter:
     def __init__(self):
-        self.image = load_image('resorce\\kirby\\main_character.png')
+        self.image = load_image('resource\\kirby\\main_character.png')
         self.dir_x  =0
         self.dir_y =0
         self.x =20

@@ -15,7 +15,6 @@ name = "MainState"
 
 back_ground =None
 font = None
-
 kirby = None
 kirby_bullet = None
 choice =None
@@ -27,7 +26,7 @@ red_monsters = None
 
 class Back_ground:
     def __init__(self):
-        self.image = load_image('resorce\\back_ground\\back_ground.png')
+        self.image = load_image('resource\\back_ground\\back_ground.png')
 
     def draw(self):
         self.image.clip_draw(0,0,game_framework.ground_size_w,game_framework.ground_size_h,game_framework.ground_size_w/2,game_framework.ground_size_h/2,game_framework.ground_size_w,game_framework.ground_size_h)
@@ -104,9 +103,9 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
             kirby_bullet.x = kirby.x
             kirby_bullet.y = kirby.y
-            if(kirby_bullet.power_level==1):
+            if kirby_bullet.power_level==1:
                 kirby_bullet.xy.append([kirby_bullet.x, kirby_bullet.y])
-            elif(kirby_bullet.power_level == 2):
+            elif kirby_bullet.power_level == 2:
                 kirby_bullet.xy.append([kirby_bullet.x, kirby_bullet.y])
                 kirby_bullet.xy_2.append([kirby_bullet.x, kirby_bullet.y])
                 kirby_bullet.xy_2_2.append([kirby_bullet.x, kirby_bullet.y])

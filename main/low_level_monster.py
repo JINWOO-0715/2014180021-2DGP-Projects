@@ -1,10 +1,11 @@
-
-import game_framework
-import Monster_bullet
 from pico2d import *
-import random
+import game_framework
+import monster_bullet
 
+import random
+choice = None
 class Monster():
+    image = None
     def __init__(self):
         self.x = game_framework.ground_size_w + 50
         self.y = random.randint(1,18)*50
@@ -14,19 +15,18 @@ class Monster():
         self.bullet_time=0
         self.draw_time_plus =0.001
         self.draw_sign = 0
-        self.monster_bird_blue = None
-        if self.monster_bird_blue ==None:
+        if Monster.image == None:
             cho = random.randint(1,4)
             if cho ==1 :
-                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_red.png')
+                self.monster_bird_blue = load_image('resource\\monster\\monster_bird_red.png')
             elif cho ==2:
-                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_yellow.png')
+                self.monster_bird_blue = load_image('resource\\monster\\monster_bird_yellow.png')
             elif cho ==3:
-                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_blue.png')
+                self.monster_bird_blue = load_image('resource\\monster\\monster_bird_blue.png')
             elif cho ==4:
-                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_green.png')
+                self.monster_bird_blue = load_image('resource\\monster\\monster_bird_green.png')
 
-        self.bullet = Monster_bullet.Monster_bullet()
+        self.bullet = monster_bullet.Monster_bullet()
 
     def set_monster_bird_red(self):
         global choice
@@ -37,8 +37,8 @@ class Monster():
         self.draw_time =random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_red.png')
-        self.bullet =  Monster_bullet.Monster_bullet()
+        self.monster_bird_blue = load_image('resource\\monster\\monster_bird_red.png')
+        self.bullet =  monster_bullet.Monster_bullet()
 
     def set_monster_bird_yellow(self):
         self.x = game_framework.ground_size_w + 50
@@ -48,8 +48,8 @@ class Monster():
         self.draw_time =random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_yellow.png')
-        self.bullet =  Monster_bullet.Monster_bullet()
+        self.monster_bird_blue = load_image('resource\\monster\\monster_bird_yellow.png')
+        self.bullet =  monster_bullet.Monster_bullet()
 
     def set_monster_bird_green(self):
         self.x = game_framework.ground_size_w + 50
@@ -59,8 +59,8 @@ class Monster():
         self.draw_time = random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_green.png')
-        self.bullet =  Monster_bullet.Monster_bullet()
+        self.monster_bird_blue = load_image('resource\\monster\\monster_bird_green.png')
+        self.bullet =  monster_bullet.Monster_bullet()
 
     def set_monster_bird_blue(self):
         self.x = game_framework.ground_size_w + 50
@@ -70,8 +70,8 @@ class Monster():
         self.draw_time = random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_blue.png')
-        self.bullet =  Monster_bullet.Monster_bullet()
+        self.monster_bird_blue = load_image('resource\\monster\\monster_bird_blue.png')
+        self.bullet =  monster_bullet.Monster_bullet()
 
     def draw(self):
         if self.draw_sign ==1:
@@ -94,7 +94,7 @@ class Monster():
             self.bullet_time += 0.01
             self.bullet.update()
             if self.x < 0:
-                if(choice == 1):
+                if choice == 1:
                     self.set_monster_bird_green()
                 elif choice ==2 :
                     self.set_monster_bird_blue()

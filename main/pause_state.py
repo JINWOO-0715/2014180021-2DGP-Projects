@@ -11,8 +11,8 @@ state = 0
 
 def enter():
     global image, image_2
-    image = load_image('time_over_3.png')
-    image_2 = load_image('time_over_4.png')
+    image = load_image('resorce\\back_ground\\pause_state_1.png')
+    image_2 = load_image('resorce\\back_ground\\pause_state_2.png')
 
 def exit():
     global image ,image_2

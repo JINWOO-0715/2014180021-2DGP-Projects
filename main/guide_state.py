@@ -10,7 +10,7 @@ state = 0
 
 def enter():
     global image
-    image = load_image('guide.png')
+    image = load_image('resorce\\back_ground\\guide.png')
 
 
 def exit():

@@ -3,7 +3,7 @@ import json
 import os
 
 from pico2d import *
-
+import Kirby
 import pause_state
 import game_framework
 import title_state
@@ -12,7 +12,7 @@ import pause_state
 
 name = "MainState"
 
-main_chracter = None
+
 back_ground =None
 font = None
 main_chracter_bullet = None
@@ -23,41 +23,20 @@ red_monster = None
 red_monsters = None
 
 
-
+kirby = None
 class Back_ground:
     def __init__(self):
-        self.image = load_image('back_ground.png')
+        self.image = load_image('resorce\\back_ground\\back_ground.png')
 
     def draw(self):
         self.image.clip_draw(0,0,game_framework.ground_size_w,game_framework.ground_size_h,game_framework.ground_size_w/2,game_framework.ground_size_h/2,game_framework.ground_size_w,game_framework.ground_size_h)
 
-class Main_charcter:
-    def __init__(self):
-        self.image = load_image('main_character.png')
-        self.dir_x  =0
-        self.dir_y =0
-        self.x =20
-        self.y=60
-        self.hp = 3
-        self.frame = 0
-
-    def draw(self):
-        self.image.clip_draw(self.frame * 75 , 0, 75 , 70 , self.x,self.y,70,70)
-
-    def update(self):
-
-        self.x += self.dir_x * 5
-        self.y += self.dir_y * 5
-        delay(0.01)
-
-    def return_character_point(self):
-        return self.x,self.y
 class Main_chracter_Bullet:
     def __init__(self):
         self.xy =[]
         self.xy_2 = []
         self.xy_2_2 = []
-        self.image_level_one = load_image('bullet_level_1.png')
+        self.image_level_one = load_image('resorce\\kirby\\bullet_level_1.png')
         self.power_level =2
         self.x = 0
         self.y = 0
@@ -112,13 +91,13 @@ class Monster():
         if self.monster_bird_blue ==None:
             cho = random.randint(1,4)
             if cho ==1 :
-                self.monster_bird_blue = load_image('monster_bird_red.png')
+                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_red.png')
             elif cho ==2:
-                self.monster_bird_blue = load_image('monster_bird_yellow.png')
+                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_yellow.png')
             elif cho ==3:
-                self.monster_bird_blue = load_image('monster_bird_blue.png')
+                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_blue.png')
             elif cho ==4:
-                self.monster_bird_blue = load_image('monster_bird_green.png')
+                self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_green.png')
 
         self.bullet = Monster_bullet()
 
@@ -131,7 +110,7 @@ class Monster():
         self.draw_time =random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('monster_bird_red.png')
+        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_red.png')
         self.bullet = Monster_bullet()
 
     def set_monster_bird_yellow(self):
@@ -142,7 +121,7 @@ class Monster():
         self.draw_time =random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('monster_bird_yellow.png')
+        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_yellow.png')
         self.bullet = Monster_bullet()
 
     def set_monster_bird_green(self):
@@ -153,7 +132,7 @@ class Monster():
         self.draw_time = random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('monster_bird_green.png')
+        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_green.png')
         self.bullet = Monster_bullet()
 
     def set_monster_bird_blue(self):
@@ -164,7 +143,7 @@ class Monster():
         self.draw_time = random.randint(1,499)*0.01
         self.bullet_time = 0
         self.draw_sign = 0
-        self.monster_bird_blue = load_image('monster_bird_blue.png')
+        self.monster_bird_blue = load_image('resorce\\monster\\monster_bird_blue.png')
         self.bullet = Monster_bullet()
 
     def draw(self):
@@ -201,7 +180,7 @@ class Monster_bullet:
     def __init__(self):
         global choice
         self.xy = []
-        self.image_level_one = load_image('monster_bullet_1.png')
+        self.image_level_one = load_image('resorce\\monster\\monster_bullet_1.png')
         self.x = 0
         self.y = 0
         self.t =0
@@ -282,9 +261,9 @@ class Monster_bullet:
                         self.xy.remove(bxy)
 
 def enter():
-    global main_charcter , back_ground , main_chracter_bullet
+    global kirby , back_ground , main_chracter_bullet
     global blue_monster,blue_monsters ,red_monster,red_monsters
-    main_charcter = Main_charcter()
+    kirby = Kirby.Main_charcter()
 
     back_ground =Back_ground()
     main_chracter_bullet = Main_chracter_Bullet()
@@ -298,9 +277,9 @@ def enter():
 
 
 def exit():
-    global main_charcter,back_ground ,main_chracter_bullet
+    global kirby,back_ground ,main_chracter_bullet
     global blue_monster,blue_monsters,red_monster,red_monsters
-    del (main_charcter)
+    del (kirby)
     del (back_ground)
     del (main_chracter_bullet)
     del (blue_monster,blue_monsters)
@@ -313,7 +292,7 @@ def resume():
     pass
 
 def handle_events():
-    global main_charcter, back_ground, main_chracter_bullet
+    global kirby, back_ground, main_chracter_bullet
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -324,28 +303,28 @@ def handle_events():
             game_framework.push_state(pause_state)
 #캐릭터 이동 구현
         elif event.type == SDL_KEYDOWN and event.key == SDLK_RIGHT:
-            main_charcter.frame = (main_charcter.frame + 1) % 5
-            main_charcter.dir_x +=1
+            kirby.frame = (kirby.frame + 1) % 5
+            kirby.dir_x +=1
         elif event.type == SDL_KEYDOWN and event.key == SDLK_LEFT:
-            main_charcter.frame = (main_charcter.frame + 1) % 5
-            main_charcter.dir_x -=1
+            kirby.frame = (kirby.frame + 1) % 5
+            kirby.dir_x -=1
 
         elif event.type == SDL_KEYDOWN and event.key == SDLK_UP:
-            main_charcter.frame = (main_charcter.frame + 1) % 5
-            main_charcter.dir_y += 1
+            kirby.frame = (kirby.frame + 1) % 5
+            kirby.dir_y += 1
         elif event.type == SDL_KEYDOWN and event.key == SDLK_DOWN:
-            main_charcter.frame = (main_charcter.frame + 1) % 5
-            main_charcter.dir_y -=1
+            kirby.frame = (kirby.frame + 1) % 5
+            kirby.dir_y -=1
 
         elif event.type == SDL_KEYUP and event.key == SDLK_RIGHT:
-            main_charcter.dir_x -=1
+            kirby.dir_x -=1
         elif event.type == SDL_KEYUP and event.key == SDLK_LEFT:
-            main_charcter.dir_x += 1
+            kirby.dir_x += 1
 
         elif event.type == SDL_KEYUP and event.key == SDLK_UP:
-            main_charcter.dir_y -= 1
+            kirby.dir_y -= 1
         elif event.type == SDL_KEYUP and event.key == SDLK_DOWN:
-            main_charcter.dir_y += 1
+            kirby.dir_y += 1
         elif event.type == SDL_KEYDOWN and event.key == SDLK_q:
             main_chracter_bullet.power_level = 1
         elif event.type == SDL_KEYDOWN and event.key == SDLK_w:
@@ -353,8 +332,8 @@ def handle_events():
 
 #총알 발사 구현
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
-            main_chracter_bullet.x = main_charcter.x
-            main_chracter_bullet.y = main_charcter.y
+            main_chracter_bullet.x = kirby.x
+            main_chracter_bullet.y = kirby.y
             if(main_chracter_bullet.power_level==1):
                 main_chracter_bullet.xy.append([main_chracter_bullet.x,main_chracter_bullet.y])
             elif(main_chracter_bullet.power_level==2):
@@ -364,7 +343,7 @@ def handle_events():
 
 def update():
     global choice
-    main_charcter.update()
+    kirby.update()
     main_chracter_bullet.update()
     choice = random.randint(1,4)
     for blue_monster in blue_monsters:
@@ -378,7 +357,7 @@ def update():
 def draw():
     clear_canvas()
     back_ground.draw()
-    main_charcter.draw()
+    kirby.draw()
     main_chracter_bullet.draw()
     for blue_monster in blue_monsters:
         blue_monster.draw()

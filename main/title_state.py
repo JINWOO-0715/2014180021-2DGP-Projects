@@ -12,9 +12,9 @@ state = 0
 
 def enter():
     global image,image_2,image_3
-    image = load_image('title_sean_1.png')
-    image_2 = load_image('title_sean_2.png')
-    image_3 = load_image('title_sean_3.png')
+    image = load_image('resorce\\back_ground\\title_sean_1.png')
+    image_2 = load_image('resorce\\back_ground\\title_sean_2.png')
+    image_3 = load_image('resorce\\back_ground\\title_sean_3.png')
 
 def exit():
     global image,image_2,image_3

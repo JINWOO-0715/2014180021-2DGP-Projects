@@ -3,14 +3,11 @@ import json
 import os
 
 from pico2d import *
-from kirby_bullet import Kirby_bullet
-from kirby import Kirby
-from level_one_monster import Level_one_monster
-
 import game_framework
+import game_world
 import pause_state
 
-
+from kirby import Kirby
 
 name = "MainState"
 
@@ -36,13 +33,8 @@ class Back_ground:
 def enter():
     global kirby , back_ground , kirby_bullet
     global blue_monster,blue_monsters ,red_monster,red_monsters
-
-    kirby = Kirby()
     back_ground =Back_ground()
-    kirby_bullet = Kirby_bullet()
-    monster_level_one = Level_one_monster()
-    blue_monsters = [Level_one_monster() for i in range(20)]
-
+    kirby = Kirby()
 
 def exit():
     global kirby,back_ground ,kirby_bullet
@@ -50,8 +42,7 @@ def exit():
     del (kirby)
     del (back_ground)
     del (kirby_bullet)
-    del (blue_monster,blue_monsters)
-    del (red_monster,red_monsters)
+
 
 def pause():
     pass
@@ -69,54 +60,12 @@ def handle_events():
             game_framework.push_state(pause_state)
         elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
             game_framework.push_state(pause_state)
-#캐릭터 이동 구현
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_RIGHT:
-            kirby.frame = (kirby.frame + 1) % 5
-            kirby.dir_x +=1
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_LEFT:
-            kirby.frame = (kirby.frame + 1) % 5
-            kirby.dir_x -=1
+        else:
+            kirby.handle_event(event)
 
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_UP:
-            kirby.frame = (kirby.frame + 1) % 5
-            kirby.dir_y += 1
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_DOWN:
-            kirby.frame = (kirby.frame + 1) % 5
-            kirby.dir_y -=1
-
-        elif event.type == SDL_KEYUP and event.key == SDLK_RIGHT:
-            kirby.dir_x -=1
-        elif event.type == SDL_KEYUP and event.key == SDLK_LEFT:
-            kirby.dir_x += 1
-
-        elif event.type == SDL_KEYUP and event.key == SDLK_UP:
-            kirby.dir_y -= 1
-        elif event.type == SDL_KEYUP and event.key == SDLK_DOWN:
-            kirby.dir_y += 1
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_q:
-            kirby_bullet.power_level = 1
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_w:
-            kirby_bullet.power_level = 2
-
-#총알 발사 구현
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
-            kirby_bullet.x = kirby.x
-            kirby_bullet.y = kirby.y
-            if kirby_bullet.power_level==1:
-                kirby_bullet.xy.append([kirby_bullet.x, kirby_bullet.y])
-            elif kirby_bullet.power_level == 2:
-                kirby_bullet.xy.append([kirby_bullet.x, kirby_bullet.y])
-                kirby_bullet.xy_2.append([kirby_bullet.x, kirby_bullet.y])
-                kirby_bullet.xy_2_2.append([kirby_bullet.x, kirby_bullet.y])
 
 def update():
-    global choice
     kirby.update()
-    kirby_bullet.update()
-    choice = random.randint(1,4)
-    for blue_monster in blue_monsters:
-        blue_monster.update()
-
 
 
 
@@ -124,9 +73,6 @@ def draw():
     clear_canvas()
     back_ground.draw()
     kirby.draw()
-    kirby_bullet.draw()
-    for blue_monster in blue_monsters:
-        blue_monster.draw()
     update_canvas()
 
 

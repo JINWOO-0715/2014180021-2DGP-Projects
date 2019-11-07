@@ -3,11 +3,13 @@ import json
 import os
 
 from pico2d import *
-import Kirby
-import Kirby_bullet
+from kirby_bullet import Kirby_bullet
+from kirby import Kirby
+from level_one_monster import Level_one_monster
+
 import game_framework
 import pause_state
-import low_level_monster
+
 
 
 name = "MainState"
@@ -35,14 +37,11 @@ def enter():
     global kirby , back_ground , kirby_bullet
     global blue_monster,blue_monsters ,red_monster,red_monsters
 
-    kirby = Kirby.Main_charcter()
+    kirby = Kirby()
     back_ground =Back_ground()
-    kirby_bullet = Kirby_bullet.Main_chracter_Bullet()
-    blue_monster = low_level_monster.Monster()
-    blue_monsters = [low_level_monster.Monster() for i in range(20)]
-
-
-
+    kirby_bullet = Kirby_bullet()
+    monster_level_one = Level_one_monster()
+    blue_monsters = [Level_one_monster() for i in range(20)]
 
 
 def exit():

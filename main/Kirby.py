@@ -1,7 +1,8 @@
 
 from pico2d import *
+import game_world
 
-class Main_charcter:
+class Kirby:
     def __init__(self):
         self.image = load_image('resource\\kirby\\main_character.png')
         self.dir_x  =0

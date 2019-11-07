@@ -4,7 +4,7 @@ import monster_bullet
 
 import random
 choice = None
-class Monster():
+class Level_one_monster:
     image = None
     def __init__(self):
         self.x = game_framework.ground_size_w + 50
@@ -15,7 +15,7 @@ class Monster():
         self.bullet_time=0
         self.draw_time_plus =0.001
         self.draw_sign = 0
-        if Monster.image == None:
+        if Level_one_monster.image == None:
             cho = random.randint(1,4)
             if cho ==1 :
                 self.monster_bird_blue = load_image('resource\\monster\\monster_bird_red.png')

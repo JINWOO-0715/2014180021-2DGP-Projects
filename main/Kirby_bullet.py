@@ -1,14 +1,14 @@
 
 from pico2d import *
 
-class Main_chracter_Bullet:
+class Kirby_bullet:
     image = None
     def __init__(self):
         self.xy = []
         self.xy_2 = []
         self.xy_2_2 = []
-        if Main_chracter_Bullet.image == None:
-            Main_chracter_Bullet.image = load_image('resource\\kirby\\bullet_level_1.png')
+        if Kirby_bullet.image == None:
+            Kirby_bullet.image = load_image('resource\\kirby\\bullet_level_1.png')
         self.power_level = 2
         self.x = 0
         self.y = 0

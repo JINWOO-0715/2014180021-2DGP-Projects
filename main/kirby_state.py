@@ -16,21 +16,21 @@ class IdleState:
     @staticmethod
     def enter(kirby, event):
         if event == RIGHT_DOWN:
-            kirby.dir_x += 1
+            kirby.dir_x += 5
         elif event == LEFT_DOWN:
-            kirby.dir_x -= 1
+            kirby.dir_x -= 5
         elif event == RIGHT_UP:
-            kirby.dir_x -= 1
+            kirby.dir_x -= 5
         elif event == LEFT_UP:
-            kirby.dir_x += 1
+            kirby.dir_x += 5
         elif event == UP_UP:
-            kirby.dir_y -= 1
+            kirby.dir_y -= 5
         elif event == UP_DOWN:
-            kirby.dir_y += 1
+            kirby.dir_y += 5
         elif event == DOWN_UP:
-            kirby.dir_y += 1
+            kirby.dir_y += 5
         elif event == DOWN_DOWN:
-            kirby.dir_y -= 1
+            kirby.dir_y -= 5
 
     @staticmethod
     def exit(kirby, event):
@@ -59,21 +59,21 @@ class RunState:
     @staticmethod
     def enter(kirby, event):
         if event == RIGHT_DOWN:
-            kirby.dir_x += 1
+            kirby.dir_x += 5
         elif event == LEFT_DOWN:
-            kirby.dir_x -= 1
+            kirby.dir_x -= 5
         elif event == RIGHT_UP:
-            kirby.dir_x -= 1
+            kirby.dir_x -= 5
         elif event == LEFT_UP:
-            kirby.dir_x += 1
+            kirby.dir_x += 5
         elif event == UP_UP:
-            kirby.dir_y -= 1
+            kirby.dir_y -= 5
         elif event == UP_DOWN:
-            kirby.dir_y += 1
+            kirby.dir_y += 5
         elif event == DOWN_UP:
-            kirby.dir_y += 1
+            kirby.dir_y += 5
         elif event == DOWN_DOWN:
-            kirby.dir_y -= 1
+            kirby.dir_y -= 5
 
     @staticmethod
     def exit(kirby, event):

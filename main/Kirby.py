@@ -39,6 +39,8 @@ class Kirby:
         self.y = 300
         self.hp = 3
         self.frame = 0
+        self.bullet_level = 1
+        self.velocity =0
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
@@ -64,6 +66,3 @@ class Kirby:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
-
-    def return_character_point(self):
-        return self.x, self.y

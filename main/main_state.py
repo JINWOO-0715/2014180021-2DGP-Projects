@@ -26,6 +26,8 @@ red_monsters = None
 class Back_ground:
     def __init__(self):
         self.image = load_image('resource\\back_ground\\back_ground.png')
+    def update(self):
+        pass
 
     def draw(self):
         self.image.clip_draw(0,0,game_framework.ground_size_w,game_framework.ground_size_h,game_framework.ground_size_w/2,game_framework.ground_size_h/2,game_framework.ground_size_w,game_framework.ground_size_h)
@@ -35,14 +37,11 @@ def enter():
     global blue_monster,blue_monsters ,red_monster,red_monsters
     back_ground =Back_ground()
     kirby = Kirby()
+    game_world.add_object(back_ground,0)
+    game_world.add_object(kirby,1)
 
 def exit():
-    global kirby,back_ground ,kirby_bullet
-    global blue_monster,blue_monsters,red_monster,red_monsters
-    del (kirby)
-    del (back_ground)
-    del (kirby_bullet)
-
+    game_world.clear()
 
 def pause():
     pass
@@ -65,14 +64,14 @@ def handle_events():
 
 
 def update():
-    kirby.update()
-
+    for game_object in game_world.all_objects():
+        game_object.update()
 
 
 def draw():
     clear_canvas()
-    back_ground.draw()
-    kirby.draw()
+    for game_object in game_world.all_objects():
+        game_object.draw()
     update_canvas()
 
 

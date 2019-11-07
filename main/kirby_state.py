@@ -1,6 +1,6 @@
 from pico2d import *
 
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN = range(8)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN , SPACE = range(9)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -33,8 +33,9 @@ class IdleState:
             kirby.dir_y -= 1
 
     @staticmethod
-    def exit(boy, event):
-        # fill here
+    def exit(kirby, event):
+        if event ==SPACE:
+            kirby.bullet()
         pass
 
     @staticmethod
@@ -76,7 +77,8 @@ class RunState:
 
     @staticmethod
     def exit(kirby, event):
-        pass
+        if event == SPACE:
+            kirby.bullet()
 
     @staticmethod
     def do(kirby):

@@ -1,11 +1,11 @@
 from pico2d import *
 
 import game_world
-
+from kirby_bullet import Kirby_bullet
 from kirby_state import IdleState
 from kirby_state import RunState
 
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN = range(8)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN , SPACE = range(9)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -16,15 +16,17 @@ key_event_table = {
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_UP): UP_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
+    (SDL_KEYDOWN, SDLK_SPACE): SPACE,
+
 }
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, UP_UP: RunState, DOWN_UP: RunState,
-                RIGHT_DOWN: RunState, LEFT_DOWN: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState
-                },
+                RIGHT_DOWN: RunState, LEFT_DOWN: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState,
+               SPACE:IdleState },
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, UP_UP: IdleState, DOWN_UP: IdleState,
-               RIGHT_DOWN: IdleState, LEFT_DOWN: IdleState, UP_DOWN: IdleState, DOWN_DOWN: IdleState
-               },
+               RIGHT_DOWN: IdleState, LEFT_DOWN: IdleState, UP_DOWN: IdleState, DOWN_DOWN: IdleState,
+              SPACE :RunState },
 }
 
 
@@ -51,6 +53,9 @@ class Kirby:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
+    def bullet(self):
+        bullets = Kirby_bullet(self.x , self.y,)
+        game_world.add_object(bullets,1)
 
     def update(self):
         self.cur_state.do(self)

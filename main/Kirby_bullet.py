@@ -2,7 +2,8 @@ from pico2d import *
 import game_world
 import game_framework
 import main_state
-
+import random
+from item import Item
 
 class Kirby_bullet:
     image = None
@@ -27,6 +28,14 @@ class Kirby_bullet:
                 main_state.level_one_monster.hp -= 1
                 main_state.score+=123
                 game_world.remove_object(self)
+                item_appear_percentage = random.randint(1,2)
+                if item_appear_percentage ==1:
+                    item_one = Item(self.x,self.y,1,item_appear_percentage)
+                    game_world.add_object(item_one,1)
+                elif item_appear_percentage ==2:
+                    item_one = Item(self.x,self.y,1,item_appear_percentage)
+                    game_world.add_object(item_one, 1)
+
 
     def get_bb(self):
         return self.x - 14, self.y - 14, self.x + 14, self.y + 14

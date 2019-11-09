@@ -59,7 +59,7 @@ class Kirby:
             self.add_event(key_event)
 
     def bullet(self):
-        bullets = Kirby_bullet(self.x , self.y,)
+        bullets = Kirby_bullet(self.x , self.y,10 ,self.bullet_level,1)
         game_world.add_object(bullets,1)
 
 

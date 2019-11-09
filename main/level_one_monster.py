@@ -33,9 +33,14 @@ class Level_one_monster:
                 self.image = load_image('resource\\monster\\monster_bird_green.png')
 
     def draw(self):
+        draw_rectangle(*self.get_bb())
         self.image.clip_draw(int(self.frame) * 36, 0, 36, 42, self.x, self.y, 60, 60)
 
+    def get_bb(self):
+        return self.x -30 , self.y -30 , self.x+30 , self.y+30
+
     def update(self):
+
         self.bullet_draw_time += 0.01
         self.x -= self.speed
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 2

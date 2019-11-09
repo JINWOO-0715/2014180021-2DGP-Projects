@@ -29,7 +29,9 @@ class Level_one_monster_bullet:
 
     def get_bb(self):
         return self.x -10 , self.y -10 , self.x+10 , self.y+10
+
     def draw(self):
+        draw_rectangle(*self.get_bb())
         if self.bullet_patterns == 1:
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y)
         elif self.bullet_patterns == 2:

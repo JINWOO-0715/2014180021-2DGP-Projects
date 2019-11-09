@@ -20,11 +20,14 @@ choice = None
 boss_monster = None
 level_one_monster = None
 level_one_monsters = []
-
+kirby_life = 100
 
 class Back_ground:
     def __init__(self):
         self.image = load_image('resource\\back_ground\\back_ground.png')
+        self.kirby_life = load_image('resource\\kirby\\life.png')
+        self.font = load_font('resource\\DungGeunMo.TTF',30)
+
 
     def update(self):
         pass
@@ -33,6 +36,8 @@ class Back_ground:
         self.image.clip_draw(0, 0, game_framework.ground_size_w, game_framework.ground_size_h,
                              game_framework.ground_size_w / 2, game_framework.ground_size_h / 2,
                              game_framework.ground_size_w, game_framework.ground_size_h)
+        self.kirby_life.clip_draw(0,0,30,31, game_framework.ground_size_w/10-80, game_framework.ground_size_h-90,50,50)
+        self.font.draw(game_framework.ground_size_w/10-55, game_framework.ground_size_h-90,' X %d' % kirby_life,(255,0,0))
 
 
 def enter():
@@ -40,6 +45,7 @@ def enter():
     global  level_one_monsters
     back_ground = Back_ground()
     kirby = Kirby()
+
     level_one_monsters = [Level_one_monster() for i in range(20)]
     boss_monster = Boss_monster()
     game_world.add_object(back_ground, 0)
@@ -81,8 +87,10 @@ def update():
         game_object.update()
     for level_one_monster in level_one_monsters:
         if collide(kirby, level_one_monster):
-            print("COLLISION")
-
+           global kirby_life
+           kirby_life-= 1
+        if collide(kirby.bullet(), level_one_monster):
+            print('~~~~')
     delay(0.01)
 
 

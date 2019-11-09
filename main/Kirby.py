@@ -37,7 +37,6 @@ class Kirby:
         self.dir_y = 0
         self.x = 20
         self.y = 300
-        self.hp = 3
         self.frame = 0
         self.bullet_level = 1
         self.velocity =0

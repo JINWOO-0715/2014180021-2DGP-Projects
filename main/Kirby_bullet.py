@@ -1,6 +1,7 @@
 from pico2d import *
 import game_world
 import game_framework
+
 class Kirby_bullet:
     image = None
     def __init__(self, x=800,y=10,velocity =10,bullet_level=1):

@@ -3,6 +3,7 @@ import game_framework
 from level_one_monster_bullet import Level_one_monster_bullet
 import game_world
 import random
+
 bullet = None
 
 TIME_PER_ACTION = 0.3
@@ -18,9 +19,11 @@ class Level_one_monster:
         self.y = random.randint(1, 18) * 50
         self.speed = 2
         self.frame = 1
-        self.bullet_count=0
+        self.bullet_count = 0
         self.r = 5
+        self.bullet_point = []
         self.bullet_draw_time = 0
+
         if Level_one_monster.image is None:
             cho = random.randint(1, 4)
             if cho == 1:
@@ -37,10 +40,9 @@ class Level_one_monster:
         self.image.clip_draw(int(self.frame) * 36, 0, 36, 42, self.x, self.y, 60, 60)
 
     def get_bb(self):
-        return self.x -27 , self.y -25 , self.x+24 , self.y+23
+        return self.x - 27, self.y - 25, self.x + 24, self.y + 23
 
     def update(self):
-
         self.bullet_draw_time += 0.01
         self.x -= self.speed
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 2
@@ -50,6 +52,6 @@ class Level_one_monster:
 
         if self.bullet_draw_time > 0.5:
             bullets = Level_one_monster_bullet(self.x, self.y, 5, 1, self.bullet_count)
+            self.bullet_point = bullets.get_bb()
             game_world.add_object(bullets, 1)
-            self.bullet_draw_time =0
-
+            self.bullet_draw_time = 0

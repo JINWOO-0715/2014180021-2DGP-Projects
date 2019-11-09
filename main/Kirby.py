@@ -45,10 +45,11 @@ class Kirby:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
     def get_bb(self):
-        return self.x -10 , self.y -10 , self.x+10 , self.y+10
+        return self.x -30 , self.y -30 , self.x+30 , self.y+30
 
     def draw(self):
         self.image.clip_draw(self.frame * 75, 0, 75, 70, self.x, self.y, 70, 70)
+        draw_rectangle(*self.get_bb())
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -61,6 +62,7 @@ class Kirby:
         bullets = Kirby_bullet(self.x , self.y,)
         game_world.add_object(bullets,1)
 
+
     def update(self):
         self.cur_state.do(self)
         if len(self.event_que) > 0:
@@ -68,3 +70,14 @@ class Kirby:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
+
+
+    def collide(a, b):
+        left_a, bottom_a, right_a, top_a = a.get_bb()
+        left_b, bottom_b, right_b, top_b = b.get_bb()
+        if left_a > right_b: return False
+        if right_a < left_b: return False
+        if top_a < bottom_b: return False
+        if bottom_a > top_b: return False
+        return True
+

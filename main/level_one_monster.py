@@ -37,7 +37,7 @@ class Level_one_monster:
         self.image.clip_draw(int(self.frame) * 36, 0, 36, 42, self.x, self.y, 60, 60)
 
     def get_bb(self):
-        return self.x -30 , self.y -30 , self.x+30 , self.y+30
+        return self.x -27 , self.y -25 , self.x+24 , self.y+23
 
     def update(self):
 

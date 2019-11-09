@@ -28,7 +28,7 @@ class Level_one_monster_bullet:
             game_world.remove_object(self)
 
     def get_bb(self):
-        return self.x -10 , self.y -10 , self.x+10 , self.y+10
+        return self.x -12 , self.y -10 , self.x+10 , self.y+10
 
     def draw(self):
         draw_rectangle(*self.get_bb())

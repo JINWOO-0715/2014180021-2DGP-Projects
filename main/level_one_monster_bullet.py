@@ -27,7 +27,11 @@ class Level_one_monster_bullet:
         if self.x < 10 or self.x > game_framework.ground_size_w - 25:
             game_world.remove_object(self)
 
+    def get_bb(self):
+        return self.x - 12, self.y - 10, self.x + 10, self.y + 10
+
     def draw(self):
+        draw_rectangle(*self.get_bb())
         if self.bullet_level == 1:
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y)
         elif self.bullet_level == 2:

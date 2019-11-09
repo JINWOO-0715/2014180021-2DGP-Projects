@@ -17,13 +17,14 @@ class Kirby_bullet:
         if self.x < 25 or self.x > game_framework.ground_size_w - 25:
             game_world.remove_object(self)
     def get_bb(self):
-        return self.x -10 , self.y -10 , self.x+10 , self.y+10
+        return self.x -14 , self.y -14 , self.x+14 , self.y+14
 
     def draw(self):
+        draw_rectangle(*self.get_bb())
         if self.bullet_level==1:
-            self.image.clip_draw(0, 0, 30, 30, self.x, self.y)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y,30,30)
         elif self.bullet_level==2:
-            self.image.clip_draw(0, 0, 30, 30, self.x, self.y)
-            self.image.clip_draw(0, 0, 30, 30, self.x, self.y+40)
-            self.image.clip_draw(0, 0, 30, 30, self.x, self.y-40)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y,30,30)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y+40,30,30)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y-40,30,30)
 

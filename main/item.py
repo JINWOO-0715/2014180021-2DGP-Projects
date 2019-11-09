@@ -1,16 +1,14 @@
 from pico2d import *
 import game_world
 import game_framework
-import math
 import main_state
 
 
-class Level_one_monster_bullet:
+class Item:
     image = None
-
-    def __init__(self, x=800, y=10, velocity=5, bullet_level=1, round_bullet_count=18):
-        if Level_one_monster_bullet.image is None:
-            Level_one_monster_bullet.image = load_image('resource\\monster\\monster_bullet_1.png')
+    def __init__(self):
+        if Item.image is None:
+            Item.image = load_image('resource\\monster\\monster_bullet_1.png')
         self.bullet_level = bullet_level
         self.x = x
         self.y = y

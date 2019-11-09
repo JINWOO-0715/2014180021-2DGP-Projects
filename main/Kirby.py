@@ -57,6 +57,7 @@ class Kirby:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
+
     def bullet(self):
         bullets = Kirby_bullet(self.x , self.y,)
         game_world.add_object(bullets,1)

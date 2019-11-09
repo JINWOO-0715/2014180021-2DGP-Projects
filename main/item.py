@@ -7,9 +7,9 @@ import main_state
 class Item:
     def __init__(self, x=600, y=20, velocity=1, type=1):
         if type == 1:
-            Item.image = load_image('resource\\item_attack_up.png')
-        elif type == 2:
-            Item.image = load_image('resource\\item_hp_up.png')
+            self.image = load_image('resource\\item_attack_up.png')
+        if type == 2:
+            self.image = load_image('resource\\item_hp_up.png')
         self.x = x
         self.y = y
         self.r = 10
@@ -28,9 +28,8 @@ class Item:
             game_world.remove_object(self)
 
     def get_bb(self):
-        return self.x - 33, self.y - 33, self.x + 33, self.y + 33
+        return self.x - 25, self.y - 25, self.x + 25, self.y + 25
 
     def draw(self):
-        draw_rectangle(*self.get_bb())
-        self.image.clip_draw(0, 0, 66, 66, self.x, self.y)
+        self.image.clip_draw(0, 0, 66, 66, self.x, self.y,50,50)
 

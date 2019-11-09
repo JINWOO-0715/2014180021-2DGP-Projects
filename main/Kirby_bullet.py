@@ -16,6 +16,8 @@ class Kirby_bullet:
             self.x += self.velocity
         if self.x < 25 or self.x > game_framework.ground_size_w - 25:
             game_world.remove_object(self)
+    def get_bb(self):
+        return self.x -10 , self.y -10 , self.x+10 , self.y+10
 
     def draw(self):
         if self.bullet_level==1:

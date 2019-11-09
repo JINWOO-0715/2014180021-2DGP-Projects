@@ -44,6 +44,8 @@ class Kirby:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
+    def get_bb(self):
+        return self.x -10 , self.y -10 , self.x+10 , self.y+10
 
     def draw(self):
         self.image.clip_draw(self.frame * 75, 0, 75, 70, self.x, self.y, 70, 70)

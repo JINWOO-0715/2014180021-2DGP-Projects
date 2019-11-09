@@ -8,6 +8,7 @@ import game_world
 import pause_state
 from level_one_monster import Level_one_monster
 from kirby import Kirby
+from boss_moster import Boss_monster
 
 name = "MainState"
 
@@ -16,6 +17,7 @@ font = None
 kirby = None
 kirby_bullet = None
 choice = None
+boss_monster = None
 level_one_monster = None
 level_one_monsters = []
 
@@ -39,8 +41,10 @@ def enter():
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster() for i in range(20)]
+    boss_monster = Boss_monster()
     game_world.add_object(back_ground, 0)
     game_world.add_object(kirby, 1)
+    game_world.add_object(boss_monster, 1)
     game_world.add_objects(level_one_monsters, 1)
 
 

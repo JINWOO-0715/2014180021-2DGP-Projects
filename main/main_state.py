@@ -21,6 +21,7 @@ boss_monster = None
 level_one_monster = None
 level_one_monsters = []
 kirby_life = 100
+score = 0
 
 class Back_ground:
     def __init__(self):
@@ -38,7 +39,7 @@ class Back_ground:
                              game_framework.ground_size_w, game_framework.ground_size_h)
         self.kirby_life.clip_draw(0,0,30,31, game_framework.ground_size_w/10-80, game_framework.ground_size_h-70,50,50)
         self.font.draw(game_framework.ground_size_w/10-55, game_framework.ground_size_h-70,' X %d' % kirby_life,(255,0,0))
-
+        self.font.draw(game_framework.ground_size_w/10-90, game_framework.ground_size_h -110, ' Score %d' % score, (255, 0, 0))
 
 
 def enter():

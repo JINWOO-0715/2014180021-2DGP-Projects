@@ -21,7 +21,7 @@ boss_monster = None
 level_one_monster = None
 level_one_monsters = []
 kirby_life = 100
-score = 0
+score = 6500
 
 class Back_ground:
     def __init__(self):
@@ -44,13 +44,14 @@ class Back_ground:
 
 def enter():
     global kirby, back_ground
-    global  level_one_monsters
+    global level_one_monsters , boss_monster
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster() for i in range(20)]
     boss_monster = Boss_monster()
     game_world.add_object(back_ground, 0)
     game_world.add_object(kirby, 1)
+    game_world.add_object(boss_monster,1)
     game_world.add_objects(level_one_monsters, 1)
 
 
@@ -89,6 +90,7 @@ def update():
         if collide(kirby, level_one_monster):
            global kirby_life
            kirby_life-= 1
+
     delay(0.01)
 
 

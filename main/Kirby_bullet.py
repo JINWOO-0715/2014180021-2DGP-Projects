@@ -19,8 +19,7 @@ class Kirby_bullet:
         self.draw_time = 0
 
     def update(self):
-        if self.bullet_level == 1:
-            self.x += self.velocity
+        self.x += self.velocity
         if self.x < 25 or self.x > game_framework.ground_size_w - 25:
             game_world.remove_object(self)
         for main_state.level_one_monster in main_state.level_one_monsters:
@@ -50,3 +49,9 @@ class Kirby_bullet:
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y, 30, 30)
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y + 40, 30, 30)
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y - 40, 30, 30)
+        else :
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y, 30, 30)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y + 40, 30, 30)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y - 40, 30, 30)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y + 100, 30, 30)
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y - 100, 30, 30)

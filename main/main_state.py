@@ -23,11 +23,12 @@ level_one_monsters = []
 kirby_life = 100
 score = 6500
 
+
 class Back_ground:
     def __init__(self):
         self.image = load_image('resource\\back_ground\\back_ground.png')
         self.kirby_life = load_image('resource\\kirby\\life.png')
-        self.font = load_font('resource\\DungGeunMo.TTF',30)
+        self.font = load_font('resource\\DungGeunMo.TTF', 30)
 
 
     def update(self):
@@ -37,24 +38,26 @@ class Back_ground:
         self.image.clip_draw(0, 0, game_framework.ground_size_w, game_framework.ground_size_h,
                              game_framework.ground_size_w / 2, game_framework.ground_size_h / 2,
                              game_framework.ground_size_w, game_framework.ground_size_h)
-        self.kirby_life.clip_draw(0,0,30,31, game_framework.ground_size_w/10-80, game_framework.ground_size_h-70,50,50)
-        self.font.draw(game_framework.ground_size_w/10-55, game_framework.ground_size_h-70,' X %d' % kirby_life,(255,0,0))
-        self.font.draw(game_framework.ground_size_w/10-90, game_framework.ground_size_h -110, ' Score %d' % score, (255, 0, 0))
+        self.kirby_life.clip_draw(0, 0, 30, 31, game_framework.ground_size_w / 10 - 80,
+                                  game_framework.ground_size_h - 70, 50, 50)
+        self.font.draw(game_framework.ground_size_w / 10 - 55, game_framework.ground_size_h - 70, ' X %d' % kirby_life,
+                       (255, 0, 0))
+        self.font.draw(game_framework.ground_size_w / 10 - 90, game_framework.ground_size_h - 110, ' Score %d' % score,
+                       (255, 0, 0))
+
 
 
 def enter():
     global kirby, back_ground
-    global level_one_monsters , boss_monster
+    global level_one_monsters, boss_monster
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster() for i in range(20)]
     boss_monster = Boss_monster()
     game_world.add_object(back_ground, 0)
     game_world.add_object(kirby, 1)
-    game_world.add_object(boss_monster,1)
+    game_world.add_object(boss_monster, 1)
     game_world.add_objects(level_one_monsters, 1)
-
-
 
 
 def exit():
@@ -88,11 +91,13 @@ def update():
         game_object.update()
     for level_one_monster in level_one_monsters:
         if collide(kirby, level_one_monster):
-           global kirby_life
-           kirby_life-= 1
+            global kirby_life
+            kirby_life -= 1
+    if collide(kirby, boss_monster):
+        kirby_life -= 1
+
 
     delay(0.01)
-
 
 
 def draw():

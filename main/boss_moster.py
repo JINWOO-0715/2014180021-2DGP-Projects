@@ -24,6 +24,7 @@ class Boss_monster:
             self.bullet_count = 0
             self.skill_use_state =0
             self.r = 5
+            self.hp =700
             self.moving_point_x = [(random.randint(600, 1000)) for i in range(10)]
             self.moving_point_y = [(random.randint(0, 800)) for i in range(10)]
             self.bullet_draw_time = 0

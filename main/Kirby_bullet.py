@@ -35,6 +35,8 @@ class Kirby_bullet:
                 elif item_appear_percentage ==2:
                     item_one = Item(self.x,self.y,1,item_appear_percentage)
                     game_world.add_object(item_one, 1)
+        if  main_state.collide(main_state.boss_monster,self):
+            main_state.boss_monster.hp -=1
 
 
 

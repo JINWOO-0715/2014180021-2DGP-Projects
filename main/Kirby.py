@@ -47,8 +47,7 @@ class Kirby:
         return self.x -30 , self.y -30 , self.x+30 , self.y+30
 
     def draw(self):
-        self.image.clip_draw(self.frame * 75, 0, 75, 70, self.x, self.y, 70, 70)
-        draw_rectangle(*self.get_bb())
+        self.image.clip_draw(self.frame * 75, 0, 75, 70, self.x, self.y, 60, 60)
 
     def add_event(self, event):
         self.event_que.insert(0, event)

@@ -2,7 +2,7 @@ from pico2d import *
 import game_world
 import game_framework
 import math
-
+import main_state
 
 class Level_one_monster_bullet:
     image = None
@@ -25,6 +25,9 @@ class Level_one_monster_bullet:
             self.r = 3
 
         if self.x < 10 or self.x > game_framework.ground_size_w - 25:
+            game_world.remove_object(self)
+        if main_state.collide(self, main_state.kirby):
+            main_state.kirby_life -= 1
             game_world.remove_object(self)
 
     def get_bb(self):

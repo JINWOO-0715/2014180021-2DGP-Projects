@@ -6,7 +6,7 @@ from pico2d import *
 import game_framework
 import game_world
 import pause_state
-from level_one_monster import Level_one_monster
+from level_one_monster import Level_one_monster_go_left
 from kirby import Kirby
 from boss_moster import Boss_monster
 
@@ -52,7 +52,7 @@ def enter():
     global level_one_monsters, boss_monster
     back_ground = Back_ground()
     kirby = Kirby()
-    level_one_monsters = [Level_one_monster() for i in range(20)]
+    level_one_monsters = [Level_one_monster_go_left() for i in range(20)]
     boss_monster = Boss_monster()
     game_world.add_object(back_ground, 0)
     game_world.add_object(kirby, 1)
@@ -95,6 +95,7 @@ def update():
             kirby_life -= 1
     if collide(kirby, boss_monster):
         kirby_life -= 1
+
 
 
     delay(0.01)

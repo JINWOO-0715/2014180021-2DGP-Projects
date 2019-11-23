@@ -30,6 +30,7 @@ class Boss_monster:
         self.moving_point_x = [(random.randint(600, 1000)) for i in range(10)]
         self.moving_point_y = [(random.randint(0, 800)) for i in range(10)]
         self.bullet_draw_time = 0
+        self.font = load_font('resource\\DungGeunMo.TTF', 30)
         if Boss_monster.image is None:
             self.image = load_image('resource\\monster\\boss_monster_skill.png')
 
@@ -41,6 +42,7 @@ class Boss_monster:
         if main_state.score > 7000:
             self.image.clip_draw(int(self.frame) * 60, 0, 60, 74, self.x, self.y, 100, 100)
             draw_rectangle(*self.get_bb())
+            self.font.draw(self.x, self.y + 20, ' HP : %d' % self.hp, (255, 0, 0))
 
     def update(self):
         global t, i, r
@@ -58,9 +60,9 @@ class Boss_monster:
                 bullet_patterns = random.randint(1, 2)
                 if bullet_patterns == 1:
                     bullets = [Level_one_monster_bullet() for i in range(10)]
-                    for bullet in bullets :
+                    for bullet in bullets:
                         bullet.x = self.x
-                        bullet.y = random.randint(40,800)
+                        bullet.y = random.randint(40, 800)
                         game_world.add_object(bullet, 1)
                     self.bullet_draw_time = 0
                     self.bullet_count = 0

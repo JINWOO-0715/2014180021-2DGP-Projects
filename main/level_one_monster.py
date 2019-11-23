@@ -11,7 +11,7 @@ ACTION_PER_TIME = 1.0
 FRAMES_PER_ACTION = 3
 
 
-class Level_one_monster:
+class Level_one_monster_go_left:
     image = None
     dead_image = None
 
@@ -27,7 +27,7 @@ class Level_one_monster:
         self.bullet_point = []
         self.bullet_draw_time = 0
         self.respawn_time = 0
-        if Level_one_monster.image is None:
+        if Level_one_monster_go_left.image is None:
             cho = random.randint(1, 4)
             if cho == 1:
                 self.image = load_image('resource\\monster\\monster_bird_red.png')

@@ -38,37 +38,39 @@ class Level_two_monster:
                 self.dead_image = load_image('resource\\monster\\dead.png')
 
     def draw (self):
-        if self.hp <= 0:
-            draw_rectangle(*self.get_bb())
-            self.dead_image.clip_draw(int(self.frame) * 126, 0, 126, 122, self.x, self.y, 60, 60)
-        else:
-            draw_rectangle(*self.get_bb())
-            self.image.clip_draw(int(self.frame) * 55, 0, 55, 42, self.x, self.y, 80, 70)
+        if main_state.time > 10:
+            if self.hp <= 0:
+                draw_rectangle(*self.get_bb())
+                self.dead_image.clip_draw(int(self.frame) * 126, 0, 126, 122, self.x, self.y, 60, 60)
+            else:
+                draw_rectangle(*self.get_bb())
+                self.image.clip_draw(int(self.frame) * 55, 0, 55, 42, self.x, self.y, 80, 70)
 
     def get_bb(self):
         return self.x - 30, self.y - 30, self.x + 30, self.y + 30
 
     def update(self):
-        self.bullet_draw_time += 0.01
-        if self.hp <= 0:
-            self.respawn_time += 0.01
-            self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 1
-        self.x -= self.speed
-        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
+        if main_state.time>10:
+            self.bullet_draw_time += 0.01
+            if self.hp <= 0:
+                self.respawn_time += 0.01
+                self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 1
+            self.x -= self.speed
+            self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
 
-        if self.respawn_time > 0.3:
-            self.x = game_framework.ground_size_w + random.randint(1, 10) * 20
-            self.y = random.randint(1, 18) * 50
-            self.hp = 1
-            self.respawn_time = 0
+            if self.respawn_time > 0.3:
+                self.x = game_framework.ground_size_w + random.randint(1, 10) * 20
+                self.y = random.randint(1, 18) * 50
+                self.hp = 1
+                self.respawn_time = 0
 
-        if self.x < 10:
-            self.x = game_framework.ground_size_w + random.randint(1, 10) * 20
-            self.y = random.randint(1, 18) * 50
+            if self.x < 10:
+                self.x = game_framework.ground_size_w + random.randint(1, 10) * 20
+                self.y = random.randint(1, 18) * 50
 
-        if self.bullet_draw_time > 0.5:
-            bullets = Level_two_monster_bullet(self.x, self.y, 20, random.randint(1,2), self.bullet_count, main_state.kirby.x,
-                                               main_state.kirby.y)
-            self.bullet_point = bullets.get_bb()
-            game_world.add_object(bullets, 1)
-            self.bullet_draw_time = 0
+            if self.bullet_draw_time > 0.5:
+                bullets = Level_two_monster_bullet(self.x, self.y, 20, random.randint(1,2), self.bullet_count, main_state.kirby.x,
+                                                   main_state.kirby.y)
+                self.bullet_point = bullets.get_bb()
+                game_world.add_object(bullets, 1)
+                self.bullet_draw_time = 0

@@ -54,7 +54,7 @@ class Back_ground:
 
 def enter():
     global kirby, back_ground
-    global level_one_monsters, boss_monster ,time_start_sign
+    global level_one_monsters, boss_monster ,time_start_sign ,level_two_monsters
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster_go_left() for i in range(20)]
@@ -109,6 +109,13 @@ def update():
         kirby_life -= 1
     if time_start_sign:
         time += get_time()-(get_time()-0.1)
+    if time >20:
+        for level_one_monster in level_one_monsters:
+            game_world.remove_object(level_one_monster)
+    if time >60:
+        for level_two_monster in level_two_monsters:
+            game_world.remove_object(level_two_monster)
+
     delay(0.01)
 
 

@@ -32,22 +32,26 @@ class Boss_monster:
         self.bullet_draw_time = 0
         self.font = load_font('resource\\DungGeunMo.TTF', 30)
         if Boss_monster.image is None:
-            self.image = load_image('resource\\monster\\boss_monster_skill.png')
+            self.image = load_image('resource\\monster\\boss_monster_mouse_stand.png')
+            self.dead = load_image('resource\\monster\\boss_monster_mouse_stand.png')
 
     def get_bb(self):
 
         return self.x - 45, self.y - 45, self.x + 45, self.y + 45
 
     def draw(self):
-        if main_state.score > 7000:
-            self.image.clip_draw(int(self.frame) * 60, 0, 60, 74, self.x, self.y, 100, 100)
+        if main_state.time > 10:
+            self.image.clip_draw(int(self.frame) * 63, 0, 60, 74, self.x, self.y, 100, 100)
             draw_rectangle(*self.get_bb())
-            self.font.draw(self.x, self.y + 20, ' HP : %d' % self.hp, (255, 0, 0))
+            self.font.draw(self.x-10, self.y + 45, ' HP : %d' % self.hp, (3, 15, 4))
+            if self.skill_use_state:
+                self.dead.clip_draw(int(self.frame) * 75, 0, 75, 59, self.x, self.y, 100, 100)
+
 
     def update(self):
         global t, i, r
-        if main_state.score > 7000:
-            self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 10
+        if main_state.time > 10:
+            self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
             self.bullet_draw_time += 0.01
             i += 1
             t = i / 100
@@ -57,7 +61,7 @@ class Boss_monster:
                 r = (r + 1) % 10
                 i = 0
             if self.bullet_draw_time > 0.5:
-                bullet_patterns = random.randint(1, 2)
+                bullet_patterns = random.randint(1, 3)
                 if bullet_patterns == 1:
                     bullets = [Level_one_monster_bullet() for i in range(10)]
                     for bullet in bullets:
@@ -73,3 +77,10 @@ class Boss_monster:
                         game_world.add_object(bullets, 1)
                     self.bullet_draw_time = 0
                     self.bullet_count = 0
+                elif bullet_patterns == 3:
+                    bullets = [Level_one_monster_bullet(self.x, self.y, 5, 3, self.bullet_count, (main_state.kirby.x-120),main_state.kirby.y) for i in range(20)]
+                    for bullet in bullets:
+                        bullet.y = random.randint(40,game_framework.ground_size_h-40)
+                    game_world.add_objects(bullets, 1)
+                    self.bullet_draw_time = 0
+

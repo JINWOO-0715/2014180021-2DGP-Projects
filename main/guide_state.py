@@ -1,8 +1,8 @@
 import game_framework
 from pico2d import *
 
-
 import title_state
+
 name = "title_state"
 
 state = 0
@@ -29,8 +29,9 @@ def handle_events():
 def draw():
     clear_canvas()
     image.draw(game_framework.ground_size_w / 2, game_framework.ground_size_h / 2, game_framework.ground_size_w,
-                   game_framework.ground_size_h)
+               game_framework.ground_size_h)
     update_canvas()
+
 
 def update():
     pass
@@ -42,9 +43,3 @@ def pause():
 
 def resume():
     pass
-
-
-
-
-
-

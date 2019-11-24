@@ -17,7 +17,6 @@ def remove_object(o):
             del o
             break
 
-
 def clear():
     for o in all_objects():
         del o

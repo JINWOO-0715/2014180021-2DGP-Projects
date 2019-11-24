@@ -18,9 +18,9 @@ class Item:
 
     def update(self):
         self.x -= self.velocity
-        if self.x < 100 or self.x > game_framework.ground_size_w - 25:
+        if self.x < 100 or self.x > game_framework.ground_size_w - 25 or main_state.kirby_life<0:
             game_world.remove_object(self)
-        if main_state.collide(self, main_state.kirby):
+        if main_state.collide(self, main_state.kirby) and main_state.kirby.bullet_level<3:
             if self.item_type == 1:
                 main_state.kirby.bullet_level += 1
             elif self.item_type == 2:

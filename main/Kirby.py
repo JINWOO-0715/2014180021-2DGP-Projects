@@ -43,6 +43,7 @@ class Kirby:
         self.y = 300
         self.frame = 0
         self.bullet_level = 1
+        self.bullet_dir =1
         self.velocity =0
         self.event_que = []
         self.cur_state = IdleState
@@ -62,8 +63,27 @@ class Kirby:
             self.add_event(key_event)
 
     def bullet(self):
-        bullets = Kirby_bullet(self.x , self.y,10 ,self.bullet_level,1)
-        game_world.add_object(bullets,1)
+        if self.bullet_level == 1:
+            bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, self.bullet_dir)
+            game_world.add_object(bullets, 1)
+        if self.bullet_level == 2:
+            bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, 1)
+            bullets_two = Kirby_bullet(self.x, self.y+40, 10, self.bullet_level, 1)
+            bullets_tri = Kirby_bullet(self.x, self.y-40, 10, self.bullet_level, 1)
+            game_world.add_object(bullets, 1)
+            game_world.add_object(bullets_two, 1)
+            game_world.add_object(bullets_tri, 1)
+        if self.bullet_level ==3:
+            bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, 1)
+            bullets_two = Kirby_bullet(self.x, self.y+40 , 10, self.bullet_level, 1)
+            bullets_tri = Kirby_bullet(self.x, self.y-40, 10, self.bullet_level, 1)
+            bullets_fou = Kirby_bullet(self.x, self.y+100 , 10, self.bullet_level, 1)
+            bullets_fiv = Kirby_bullet(self.x, self.y -100, 10, self.bullet_level, 1)
+            game_world.add_object(bullets, 1)
+            game_world.add_object(bullets_two, 1)
+            game_world.add_object(bullets_tri, 1)
+            game_world.add_object(bullets_fou, 1)
+            game_world.add_object(bullets_fiv, 1)
 
 
     def update(self):

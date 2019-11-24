@@ -38,7 +38,7 @@ class Level_two_monster_bullet:
             self.x -= 5
         if self.x < 10 or self.x > game_framework.ground_size_w - 25:
             game_world.remove_object(self)
-        if main_state.collide(self, main_state.kirby):
+        if main_state.collide(self, main_state.kirby) or main_state.kirby_life<0:
             main_state.kirby_life -= 1
             game_world.remove_object(self)
 

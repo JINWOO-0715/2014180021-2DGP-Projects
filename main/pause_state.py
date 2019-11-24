@@ -35,6 +35,7 @@ def handle_events():
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_RETURN):
             if (state % 2 == 0):
                 game_framework.pop_state()
+                main_state.time_start_sign =True
             elif (state % 2 == 1):
                 game_framework.quit()
 
@@ -55,6 +56,7 @@ def draw():
 
 
 def update():
+
     pass
 
 

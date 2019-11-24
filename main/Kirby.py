@@ -1,5 +1,9 @@
 from pico2d import *
 
+TIME_PER_ACTION = 0.3
+ACTION_PER_TIME = 1.0
+FRAMES_PER_ACTION = 3
+import game_framework
 import game_world
 from kirby_bullet import Kirby_bullet
 from kirby_state import IdleState
@@ -44,10 +48,10 @@ class Kirby:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
     def get_bb(self):
-        return self.x -30 , self.y -30 , self.x+30 , self.y+30
+        return self.x -20 , self.y -20 , self.x+20 , self.y+20
 
     def draw(self):
-        self.image.clip_draw(self.frame * 75, 0, 75, 70, self.x, self.y, 60, 60)
+        self.image.clip_draw(int(self.frame) * 75, 0, 75, 70, self.x, self.y, 60, 60)
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -63,6 +67,7 @@ class Kirby:
 
 
     def update(self):
+        self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
         self.cur_state.do(self)
         if len(self.event_que) > 0:
             event = self.event_que.pop()

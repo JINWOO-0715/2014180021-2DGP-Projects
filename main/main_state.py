@@ -7,8 +7,10 @@ import game_framework
 import game_world
 import pause_state
 from level_one_monster import Level_one_monster_go_left
+from level_two_monster import Level_two_monster
 from kirby import Kirby
 from boss_moster import Boss_monster
+
 
 name = "MainState"
 
@@ -20,9 +22,13 @@ choice = None
 boss_monster = None
 level_one_monster = None
 level_one_monsters = []
+level_two_monster = None
+level_two_monsters = []
 kirby_life = 100
-score = 6500
-
+score = 0
+time = 0
+time_start_sign =False
+stage_two_sign =True
 
 class Back_ground:
     def __init__(self):
@@ -44,20 +50,22 @@ class Back_ground:
                        (255, 0, 0))
         self.font.draw(game_framework.ground_size_w / 10 - 90, game_framework.ground_size_h - 110, ' Score %d' % score,
                        (255, 0, 0))
-
-
+        self.font.draw(600, 750, ' Time %d' % time, (255, 0, 0))
 
 def enter():
     global kirby, back_ground
-    global level_one_monsters, boss_monster
+    global level_one_monsters, boss_monster ,time_start_sign
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster_go_left() for i in range(20)]
+    level_two_monsters = [Level_two_monster() for i in range(20)]
     boss_monster = Boss_monster()
     game_world.add_object(back_ground, 0)
     game_world.add_object(kirby, 1)
     game_world.add_object(boss_monster, 1)
+    game_world.add_objects(level_two_monsters, 1)
     game_world.add_objects(level_one_monsters, 1)
+    time_start_sign = True
 
 
 def exit():
@@ -73,7 +81,7 @@ def resume():
 
 
 def handle_events():
-    global kirby, back_ground, kirby_bullet
+    global kirby, back_ground, kirby_bullet ,time_start_sign
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -81,23 +89,26 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.push_state(pause_state)
         elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
+            time_start_sign = False
             game_framework.push_state(pause_state)
         else:
             kirby.handle_event(event)
 
 
 def update():
+    global time ,level_two_monsters ,stage_two_sign , kirby_life
     for game_object in game_world.all_objects():
         game_object.update()
     for level_one_monster in level_one_monsters:
         if collide(kirby, level_one_monster):
-            global kirby_life
+            kirby_life -= 1
+    for level_two_monster in level_two_monsters:
+        if collide(kirby, level_two_monster):
             kirby_life -= 1
     if collide(kirby, boss_monster):
         kirby_life -= 1
-
-
-
+    if time_start_sign:
+        time += get_time()-(get_time()-0.1)
     delay(0.01)
 
 

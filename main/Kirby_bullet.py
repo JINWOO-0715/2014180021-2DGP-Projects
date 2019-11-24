@@ -5,6 +5,7 @@ import main_state
 import random
 from item import Item
 
+
 class Kirby_bullet:
     image = None
 
@@ -25,19 +26,29 @@ class Kirby_bullet:
         for main_state.level_one_monster in main_state.level_one_monsters:
             if main_state.collide(self, main_state.level_one_monster) and main_state.level_one_monster.hp == 1:
                 main_state.level_one_monster.hp -= 1
-                main_state.score+=123
+                main_state.score += 123
                 game_world.remove_object(self)
-                item_appear_percentage = random.randint(0,19)
-                if item_appear_percentage ==1:
-                    item_one = Item(self.x,self.y,1,item_appear_percentage)
-                    game_world.add_object(item_one,1)
-                elif item_appear_percentage ==2:
-                    item_one = Item(self.x,self.y,1,item_appear_percentage)
+                item_appear_percentage = random.randint(0, 19)
+                if item_appear_percentage == 1:
+                    item_one = Item(self.x, self.y, 1, item_appear_percentage)
                     game_world.add_object(item_one, 1)
-        if  main_state.collide(main_state.boss_monster,self):
-            main_state.boss_monster.hp -=1
-
-
+                elif item_appear_percentage == 2:
+                    item_one = Item(self.x, self.y, 1, item_appear_percentage)
+                    game_world.add_object(item_one, 1)
+        for main_state.level_two_monster in main_state.level_two_monsters:
+            if main_state.collide(self, main_state.level_two_monster) and main_state.level_two_monster.hp == 1:
+                main_state.level_two_monster.hp -= 1
+                main_state.score += 123
+                game_world.remove_object(self)
+                item_appear_percentage = random.randint(0, 19)
+                if item_appear_percentage == 1:
+                    item_one = Item(self.x, self.y, 1, item_appear_percentage)
+                    game_world.add_object(item_one, 1)
+                elif item_appear_percentage == 2:
+                    item_one = Item(self.x, self.y, 1, item_appear_percentage)
+                    game_world.add_object(item_one, 1)
+        if main_state.collide(main_state.boss_monster, self):
+            main_state.boss_monster.hp -= 1
 
     def get_bb(self):
         return self.x - 14, self.y - 14, self.x + 14, self.y + 14
@@ -49,7 +60,7 @@ class Kirby_bullet:
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y, 30, 30)
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y + 40, 30, 30)
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y - 40, 30, 30)
-        else :
+        else:
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y, 30, 30)
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y + 40, 30, 30)
             self.image.clip_draw(0, 0, 30, 30, self.x, self.y - 40, 30, 30)

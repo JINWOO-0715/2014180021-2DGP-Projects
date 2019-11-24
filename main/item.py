@@ -14,7 +14,7 @@ class Item:
         self.y = y
         self.r = 10
         self.item_type = type
-        self.velocity = velocity - 0.5
+        self.velocity =velocity +4
 
     def update(self):
         self.x -= self.velocity

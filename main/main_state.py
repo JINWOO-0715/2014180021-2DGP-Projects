@@ -104,7 +104,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_2:
             time = 120
         elif event.type == SDL_KEYDOWN and event.key == SDLK_3:
-            time =210
+            time =510
             pass
         elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
             kirby_life = 3

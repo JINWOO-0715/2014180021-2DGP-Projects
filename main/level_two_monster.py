@@ -40,10 +40,10 @@ class Level_two_monster:
     def draw (self):
         if main_state.time > 100:
             if self.hp <= 0:
-                draw_rectangle(*self.get_bb())
+                #draw_rectangle(*self.get_bb())
                 self.dead_image.clip_draw(int(self.frame) * 126, 0, 126, 122, self.x, self.y, 60, 60)
             else:
-                draw_rectangle(*self.get_bb())
+                #draw_rectangle(*self.get_bb())
                 self.image.clip_draw(int(self.frame) * 55, 0, 55, 42, self.x, self.y, 80, 70)
 
     def get_bb(self):

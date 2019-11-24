@@ -1,6 +1,6 @@
 from pico2d import *
 
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN , SPACE = range(9)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN, SPACE, D_DOWN, S_DOWN, A_DOWN, W_DOWN = range(13)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -11,15 +11,19 @@ key_event_table = {
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_UP): UP_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
+    (SDL_KEYDOWN, SDLK_d): D_DOWN,
+    (SDL_KEYDOWN, SDLK_a): A_DOWN,
+    (SDL_KEYDOWN, SDLK_s): S_DOWN,
+    (SDL_KEYDOWN, SDLK_w): W_DOWN,
 }
+
+
 class IdleState:
     @staticmethod
     def enter(kirby, event):
         if event == RIGHT_DOWN:
-            kirby.bullet_dir = 1
             kirby.dir_x += 5
         elif event == LEFT_DOWN:
-            kirby.bullet_dir = 3
             kirby.dir_x -= 5
         elif event == RIGHT_UP:
             kirby.dir_x -= 5
@@ -28,17 +32,29 @@ class IdleState:
         elif event == UP_UP:
             kirby.dir_y -= 5
         elif event == UP_DOWN:
-            kirby.bullet_dir = 2
             kirby.dir_y += 5
         elif event == DOWN_UP:
             kirby.dir_y += 5
         elif event == DOWN_DOWN:
-            kirby.bullet_dir = 4
             kirby.dir_y -= 5
+        elif event == A_DOWN:
+            kirby.bullet_dir = 3
+        elif event == D_DOWN:
+            kirby.bullet_dir = 1
+        elif event == S_DOWN:
+            kirby.bullet_dir = 4
+        elif event == W_DOWN:
+            kirby.bullet_dir = 2
 
     @staticmethod
     def exit(kirby, event):
-        if event ==SPACE:
+        if event == W_DOWN:
+            kirby.bullet()
+        elif event == A_DOWN:
+            kirby.bullet()
+        elif event == S_DOWN:
+            kirby.bullet()
+        elif event == D_DOWN:
             kirby.bullet()
         pass
 
@@ -53,7 +69,7 @@ class IdleState:
     @staticmethod
     def draw(kirby):
         if kirby.dir_x == 1:
-            kirby.image.clip_draw(kirby.frame * 75 , 0, 75 , 70, kirby.x, kirby.y,70,70)
+            kirby.image.clip_draw(kirby.frame * 75, 0, 75, 70, kirby.x, kirby.y, 70, 70)
         else:
             kirby.image.clip_draw(kirby.frame * 75, 0, 75, 70, kirby.x, kirby.y, 70, 70)
 
@@ -63,10 +79,8 @@ class RunState:
     @staticmethod
     def enter(kirby, event):
         if event == RIGHT_DOWN:
-            kirby.bullet_dir = 1
             kirby.dir_x += 5
         elif event == LEFT_DOWN:
-            kirby.bullet_dir = 3
             kirby.dir_x -= 5
         elif event == RIGHT_UP:
             kirby.dir_x -= 5
@@ -75,17 +89,29 @@ class RunState:
         elif event == UP_UP:
             kirby.dir_y -= 5
         elif event == UP_DOWN:
-            kirby.bullet_dir = 2
             kirby.dir_y += 5
         elif event == DOWN_UP:
             kirby.dir_y += 5
         elif event == DOWN_DOWN:
-            kirby.bullet_dir = 4
             kirby.dir_y -= 5
+        elif event == A_DOWN:
+            kirby.bullet_dir = 3
+        elif event == D_DOWN:
+            kirby.bullet_dir = 1
+        elif event == S_DOWN:
+            kirby.bullet_dir = 4
+        elif event == W_DOWN:
+            kirby.bullet_dir = 2
 
     @staticmethod
     def exit(kirby, event):
-        if event == SPACE:
+        if event == W_DOWN:
+            kirby.bullet()
+        elif event == A_DOWN:
+            kirby.bullet()
+        elif event == S_DOWN:
+            kirby.bullet()
+        elif event == D_DOWN:
             kirby.bullet()
 
     @staticmethod
@@ -97,6 +123,4 @@ class RunState:
 
     @staticmethod
     def draw(kirby):
-        kirby.image.clip_draw(kirby.frame * 75 , 75, 75 , 70, kirby.x, kirby.y,70,70)
-
-
+        kirby.image.clip_draw(kirby.frame * 75, 75, 75, 70, kirby.x, kirby.y, 70, 70)

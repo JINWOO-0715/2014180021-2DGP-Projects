@@ -61,4 +61,12 @@ class Kirby_bullet:
         return self.x - 14, self.y - 14, self.x + 14, self.y + 14
 
     def draw(self):
-        self.image.clip_draw(0, 0, 30, 30, self.x, self.y, 30, 30)
+        if self.bullet_dir ==1:
+            self.image.clip_draw(0, 0, 30, 30, self.x, self.y, 30, 30)
+        if self.bullet_dir ==2:
+            self.image.clip_composite_draw(0, 0, 30, 30,1.57,'' ,self.x, self.y, 30, 30)
+        if self.bullet_dir == 3:
+            self.image.clip_composite_draw(0, 0, 30, 30, (1.57 *2), '', self.x, self.y, 30, 30)
+        if self.bullet_dir == 4:
+            self.image.clip_composite_draw(0, 0, 30, 30, (1.57*3), '', self.x, self.y, 30, 30)
+

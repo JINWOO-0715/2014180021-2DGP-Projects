@@ -9,7 +9,7 @@ from kirby_bullet import Kirby_bullet
 from kirby_state import IdleState
 from kirby_state import RunState
 
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN , SPACE = range(9)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_UP, UP_DOWN, DOWN_UP, DOWN_DOWN, SPACE, D_DOWN, S_DOWN, A_DOWN, W_DOWN = range(13)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -20,17 +20,19 @@ key_event_table = {
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_UP): UP_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_SPACE): SPACE,
-
+    (SDL_KEYDOWN, SDLK_d): D_DOWN,
+    (SDL_KEYDOWN, SDLK_a): A_DOWN,
+    (SDL_KEYDOWN, SDLK_s): S_DOWN,
+    (SDL_KEYDOWN, SDLK_w): W_DOWN,
 }
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, UP_UP: RunState, DOWN_UP: RunState,
                 RIGHT_DOWN: RunState, LEFT_DOWN: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState,
-               SPACE:IdleState },
+               SPACE:IdleState  , D_DOWN:IdleState ,A_DOWN:IdleState , W_DOWN:IdleState ,S_DOWN:IdleState  },
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, UP_UP: IdleState, DOWN_UP: IdleState,
                RIGHT_DOWN: IdleState, LEFT_DOWN: IdleState, UP_DOWN: IdleState, DOWN_DOWN: IdleState,
-              SPACE :RunState },
+              SPACE :RunState ,D_DOWN:RunState ,A_DOWN:RunState ,S_DOWN:IdleState ,W_DOWN:IdleState },
 }
 
 
@@ -67,18 +69,18 @@ class Kirby:
             bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, self.bullet_dir)
             game_world.add_object(bullets, 1)
         if self.bullet_level == 2:
-            bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, 1)
-            bullets_two = Kirby_bullet(self.x, self.y+40, 10, self.bullet_level, 1)
-            bullets_tri = Kirby_bullet(self.x, self.y-40, 10, self.bullet_level, 1)
+            bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, self.bullet_dir)
+            bullets_two = Kirby_bullet(self.x, self.y+40, 10, self.bullet_level, self.bullet_dir)
+            bullets_tri = Kirby_bullet(self.x, self.y-40, 10, self.bullet_level, self.bullet_dir)
             game_world.add_object(bullets, 1)
             game_world.add_object(bullets_two, 1)
             game_world.add_object(bullets_tri, 1)
         if self.bullet_level ==3:
-            bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, 1)
-            bullets_two = Kirby_bullet(self.x, self.y+40 , 10, self.bullet_level, 1)
-            bullets_tri = Kirby_bullet(self.x, self.y-40, 10, self.bullet_level, 1)
-            bullets_fou = Kirby_bullet(self.x, self.y+100 , 10, self.bullet_level, 1)
-            bullets_fiv = Kirby_bullet(self.x, self.y -100, 10, self.bullet_level, 1)
+            bullets = Kirby_bullet(self.x, self.y, 10, self.bullet_level, self.bullet_dir)
+            bullets_two = Kirby_bullet(self.x, self.y+40 , 10, self.bullet_level,self.bullet_dir)
+            bullets_tri = Kirby_bullet(self.x, self.y-40, 10, self.bullet_level, self.bullet_dir)
+            bullets_fou = Kirby_bullet(self.x, self.y+100 , 10, self.bullet_level, self.bullet_dir)
+            bullets_fiv = Kirby_bullet(self.x, self.y -100, 10, self.bullet_level, self.bullet_dir)
             game_world.add_object(bullets, 1)
             game_world.add_object(bullets_two, 1)
             game_world.add_object(bullets_tri, 1)

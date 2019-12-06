@@ -40,7 +40,7 @@ class Boss_monster:
         return self.x - 45, self.y - 45, self.x + 45, self.y + 45
 
     def draw(self):
-        if main_state.time > 400:
+        if main_state.time > 300:
             self.image.clip_draw(int(self.frame) * 63, 0, 60, 74, self.x, self.y, 100, 100)
             draw_rectangle(*self.get_bb())
             self.font.draw(self.x-10, self.y + 45, ' HP : %d' % self.hp, (3, 15, 4))
@@ -50,7 +50,7 @@ class Boss_monster:
 
     def update(self):
         global t, i, r
-        if main_state.time > 500:
+        if main_state.time > 300:
             self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 4
             self.bullet_draw_time += 0.01
             i += 1

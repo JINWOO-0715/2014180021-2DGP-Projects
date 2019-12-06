@@ -38,7 +38,7 @@ class Level_two_monster:
                 self.dead_image = load_image('resource\\monster\\dead.png')
 
     def draw (self):
-        if main_state.time > 200:
+        if main_state.time > 150:
             if self.hp <= 0:
                 #draw_rectangle(*self.get_bb())
                 self.dead_image.clip_draw(int(self.frame) * 126, 0, 126, 122, self.x, self.y, 60, 60)
@@ -50,7 +50,7 @@ class Level_two_monster:
         return self.x - 30, self.y - 30, self.x + 30, self.y + 30
 
     def update(self):
-        if main_state.time>100:
+        if main_state.time>150:
             self.bullet_draw_time += 0.01
             if self.hp <= 0:
                 self.respawn_time += 0.01

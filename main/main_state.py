@@ -25,7 +25,7 @@ level_one_monster = None
 level_one_monsters = []
 level_two_monster = None
 level_two_monsters = []
-kirby_life = 5
+kirby_life = 0
 score = 0
 time = 0
 time_start_sign =False
@@ -60,10 +60,9 @@ class Back_ground:
         self.font.draw(600, 750, ' Time %d' % time, (255, 0, 0))
 
 def enter():
-
     global kirby, back_ground,kirby_life ,score,time
     global level_one_monsters, boss_monster ,time_start_sign ,level_two_monsters
-    kirby_life =5
+    kirby_life =1000
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster_go_left() for i in range(20)]
@@ -122,10 +121,10 @@ def update():
         kirby_life -= 1
     if time_start_sign:
         time += get_time()-(get_time()-0.1)
-    if time >200:
+    if time >150:
         for level_one_monster in level_one_monsters:
             game_world.remove_object(level_one_monster)
-    if time >400:
+    if time >300:
         for level_two_monster in level_two_monsters:
             game_world.remove_object(level_two_monster)
     if kirby_life<0:

@@ -12,15 +12,15 @@ def enter():
     global dead_sound
     global image
     image = load_image("resource\\back_ground\\game_over.png")
-    dead_sound.set_volume(64)
-    dead_sound.play()
+    #dead_sound.set_volume(64)
+    #dead_sound.play()
 
 
 
 def exit():
     global image ,dead_sound
     del (image)
-    del (dead_sound)
+    #del (dead_sound)
 
 
 def update():

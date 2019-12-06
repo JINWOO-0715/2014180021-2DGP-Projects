@@ -6,21 +6,21 @@ import title_state
 name = "StartState"
 image = None
 logo_time = 0.0
-
+dead_sound =None
 
 def enter():
-    global dead_sound
-    global image
+    global image ,dead_sound
     image = load_image("resource\\back_ground\\game_over.png")
-    #dead_sound.set_volume(64)
-    #dead_sound.play()
+    dead_sound = load_music('resource\\sound\\endgame.mp3')
+    dead_sound.set_volume(80)
+    dead_sound.play()
+
 
 
 
 def exit():
-    global image ,dead_sound
+    global image
     del (image)
-    #del (dead_sound)
 
 
 def update():

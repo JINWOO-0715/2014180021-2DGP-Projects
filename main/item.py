@@ -15,7 +15,7 @@ class Item:
         self.r = 10
         self.item_type = type
         self.velocity =velocity +4
-        self.get_item_sound = load_music('resource\\sound\\get_item.mp3')
+        self.get_item_sound = load_wav('resource\\sound\\get_item_.wav')
         self.get_item_sound.set_volume(100)
 
 
@@ -23,13 +23,12 @@ class Item:
         self.x -= self.velocity
         if self.x < 100 or self.x > game_framework.ground_size_w - 25 or main_state.kirby_life<0:
             game_world.remove_object(self)
-        if main_state.collide(self, main_state.kirby) and main_state.kirby.bullet_level<3:
-
-            if self.item_type == 1:
+        if main_state.collide(self, main_state.kirby):
+            self.get_item_sound.play()
+            if self.item_type == 1 and main_state.kirby.bullet_level<3:
                 main_state.kirby.bullet_level += 1
             elif self.item_type == 2:
                 main_state.kirby_life+= 10
-            self.get_item_sound.play()
             game_world.remove_object(self)
 
     def get_bb(self):

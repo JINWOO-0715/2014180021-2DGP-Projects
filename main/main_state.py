@@ -6,6 +6,7 @@ from pico2d import *
 import game_framework
 import game_world
 import pause_state
+import clear_state
 from level_one_monster import Level_one_monster_go_left
 from level_two_monster import Level_two_monster
 from Kirby import Kirby
@@ -25,7 +26,7 @@ level_one_monster = None
 level_one_monsters = []
 level_two_monster = None
 level_two_monsters = []
-kirby_life = 0
+kirby_life = 50
 score = 0
 time = 0
 time_start_sign =False
@@ -38,9 +39,9 @@ class Back_ground:
         self.image = load_image('resource\\back_ground\\back_ground.png')
         self.kirby_life = load_image('resource\\kirby\\life.png')
         self.font = load_font('resource\\DungGeunMo.TTF', 30)
-        self.bgm = load_wav('main_bgm.wav')
+        self.bgm = load_music('main_bgm_.mp3')
         self.bgm.set_volume(60)
-        self.bgm.play()
+        self.bgm.repeat_play()
 
 
     def update(self):
@@ -62,7 +63,7 @@ class Back_ground:
 def enter():
     global kirby, back_ground,kirby_life ,score,time
     global level_one_monsters, boss_monster ,time_start_sign ,level_two_monsters
-    kirby_life =1000
+    kirby_life =1
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster_go_left() for i in range(20)]
@@ -131,6 +132,10 @@ def update():
         game_world.remove_object(boss_monster)
         game_world.remove_object(kirby)
         game_framework.change_state(dead_state)
+    if boss_monster.hp<9000:
+        game_world.remove_object(boss_monster)
+        game_world.remove_object(kirby)
+        game_framework.change_state(clear_state)
 
     delay(0.01)
 

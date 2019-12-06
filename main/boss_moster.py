@@ -42,7 +42,6 @@ class Boss_monster:
     def draw(self):
         if main_state.time > 300:
             self.image.clip_draw(int(self.frame) * 63, 0, 60, 74, self.x, self.y, 100, 100)
-            draw_rectangle(*self.get_bb())
             self.font.draw(self.x-10, self.y + 45, ' HP : %d' % self.hp, (3, 15, 4))
             if self.skill_use_state:
                 self.dead.clip_draw(int(self.frame) * 75, 0, 75, 59, self.x, self.y, 100, 100)

@@ -50,7 +50,7 @@ class Kirby:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
-        self.attack_sound = load_music('resource\\sound\\cartoon016.mp3')
+        self.attack_sound = load_wav('resource\\sound\\cartoon022_.wav')
         self.attack_sound.set_volume(30)
 
     def get_bb(self):

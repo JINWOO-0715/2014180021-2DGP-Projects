@@ -5,7 +5,7 @@ ACTION_PER_TIME = 1.0
 FRAMES_PER_ACTION = 3
 import game_framework
 import game_world
-from kirby_bullet import Kirby_bullet
+from Kirby_bullet import Kirby_bullet
 from kirby_state import IdleState
 from kirby_state import RunState
 
@@ -50,6 +50,9 @@ class Kirby:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
+        self.attack_sound = load_music('resource\\sound\\cartoon016.mp3')
+        self.attack_sound.set_volume(30)
+
     def get_bb(self):
         return self.x -20 , self.y -20 , self.x+20 , self.y+20
 

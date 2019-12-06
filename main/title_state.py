@@ -3,24 +3,33 @@ from pico2d import *
 import guide_state
 import main_state
 
+
 name = "title_state"
 image = None
 image_2 = None
 image_3 = None
 state = 0
-
+title_sound = None
 
 def enter():
-    global image,image_2,image_3
+    global image, image_2, image_3,title_sound
+
+    title_sound = load_music('resource\\sound\\Title_1.mp3')
     image = load_image('resource\\back_ground\\title_sean_1.png')
     image_2 = load_image('resource\\back_ground\\title_sean_2.png')
     image_3 = load_image('resource\\back_ground\\title_sean_3.png')
+    title_sound.set_volume(40)
+    title_sound.play()
+
+
 
 def exit():
-    global image,image_2,image_3
+    global image, image_2, image_3 ,title_sound
     del (image)
     del (image_2)
     del (image_3)
+    del (title_sound)
+
 
 def handle_events():
     global state
@@ -29,9 +38,9 @@ def handle_events():
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             if (state % 3 == 0):
                 game_framework.change_state(main_state)
-            elif state % 3 ==1:
+            elif state % 3 == 1:
                 game_framework.push_state(guide_state)
-            elif state %3 ==2:
+            elif state % 3 == 2:
                 game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_DOWN):
             state += 1
@@ -52,7 +61,10 @@ def draw():
                      game_framework.ground_size_h)
     update_canvas()
 
+
 def update():
+    global  title_sound
+
     pass
 
 
@@ -62,9 +74,3 @@ def pause():
 
 def resume():
     pass
-
-
-
-
-
-

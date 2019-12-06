@@ -9,16 +9,23 @@ logo_time = 0.0
 
 
 def enter():
+    global dead_sound
     global image
     image = load_image("resource\\back_ground\\game_over.png")
+    dead_sound.set_volume(64)
+    dead_sound.play()
+
+
 
 def exit():
-    global image
+    global image ,dead_sound
     del (image)
+    del (dead_sound)
 
 
 def update():
-    global logo_time
+    global logo_time , sound
+
     if (logo_time > 1.0):
         logo_time = 0
         # game_framework.quit()

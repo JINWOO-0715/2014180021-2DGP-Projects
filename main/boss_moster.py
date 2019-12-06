@@ -40,7 +40,7 @@ class Boss_monster:
         return self.x - 45, self.y - 45, self.x + 45, self.y + 45
 
     def draw(self):
-        if main_state.time > 500:
+        if main_state.time > 400:
             self.image.clip_draw(int(self.frame) * 63, 0, 60, 74, self.x, self.y, 100, 100)
             draw_rectangle(*self.get_bb())
             self.font.draw(self.x-10, self.y + 45, ' HP : %d' % self.hp, (3, 15, 4))

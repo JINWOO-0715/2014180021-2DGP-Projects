@@ -50,12 +50,16 @@ class IdleState:
     def exit(kirby, event):
         if event == W_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
         elif event == A_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
         elif event == S_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
         elif event == D_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
         pass
 
     @staticmethod
@@ -107,12 +111,16 @@ class RunState:
     def exit(kirby, event):
         if event == W_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
         elif event == A_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
         elif event == S_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
         elif event == D_DOWN:
             kirby.bullet()
+            kirby.attack_sound.play()
 
     @staticmethod
     def do(kirby):

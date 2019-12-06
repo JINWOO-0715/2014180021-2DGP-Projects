@@ -34,6 +34,7 @@ class Kirby_bullet:
             if main_state.collide(self, main_state.level_one_monster) and main_state.level_one_monster.hp == 1:
                 main_state.level_one_monster.hp -= 1
                 main_state.score += 123
+                main_state.level_one_monster.dead_sound.play()
                 game_world.remove_object(self)
                 item_appear_percentage = random.randint(0, 19)
                 if item_appear_percentage == 1:

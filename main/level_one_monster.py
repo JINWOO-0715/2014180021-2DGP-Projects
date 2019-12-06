@@ -27,6 +27,8 @@ class Level_one_monster_go_left:
         self.bullet_point = []
         self.bullet_draw_time = 0
         self.respawn_time = 0
+        self.dead_sound = load_wav('resource\\sound\\bird_dead.wav')
+        self.dead_sound.set_volume(w)
         if Level_one_monster_go_left.image is None:
             cho = random.randint(1, 4)
             if cho == 1:

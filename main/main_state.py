@@ -8,7 +8,7 @@ import game_world
 import pause_state
 from level_one_monster import Level_one_monster_go_left
 from level_two_monster import Level_two_monster
-from kirby import Kirby
+from Kirby import Kirby
 from boss_moster import Boss_monster
 import dead_state
 
@@ -32,23 +32,28 @@ time_start_sign =False
 stage_two_sign =True
 boss_monster =None
 
+
 class Back_ground:
     def __init__(self):
         self.image = load_image('resource\\back_ground\\back_ground.png')
         self.kirby_life = load_image('resource\\kirby\\life.png')
         self.font = load_font('resource\\DungGeunMo.TTF', 30)
+        self.bgm = load_wav('main_bgm.wav')
+        self.bgm.set_volume(60)
+        self.bgm.play()
 
 
     def update(self):
         pass
 
     def draw(self):
+        global kirby
         self.image.clip_draw(0, 0, game_framework.ground_size_w, game_framework.ground_size_h,
                              game_framework.ground_size_w / 2, game_framework.ground_size_h / 2,
                              game_framework.ground_size_w, game_framework.ground_size_h)
         self.kirby_life.clip_draw(0, 0, 30, 31, game_framework.ground_size_w / 10 - 80,
                                   game_framework.ground_size_h - 70, 50, 50)
-        self.font.draw(game_framework.ground_size_w / 10 - 55, game_framework.ground_size_h - 70, ' X %d' % kirby_life,
+        self.font.draw(kirby.x ,kirby.y+15 ,' X %d' % kirby_life,
                        (255, 0, 0))
         self.font.draw(game_framework.ground_size_w / 10 - 90, game_framework.ground_size_h - 110, ' Score %d' % score,
                        (255, 0, 0))
@@ -70,7 +75,7 @@ def enter():
     game_world.add_objects(level_two_monsters, 1)
     game_world.add_objects(level_one_monsters, 1)
     time_start_sign = True
-    kirby_life = 100
+
     score = 0
     time = 0
 
@@ -99,17 +104,6 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
             time_start_sign = False
             game_framework.push_state(pause_state)
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_1:
-            time =10
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_2:
-            time = 120
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_3:
-            time =510
-            pass
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_4:
-            kirby_life = 3
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_5:
-            kirby_life = 100
         else:
             kirby.handle_event(event)
 
@@ -128,16 +122,15 @@ def update():
         kirby_life -= 1
     if time_start_sign:
         time += get_time()-(get_time()-0.1)
-    if time >100:
+    if time >200:
         for level_one_monster in level_one_monsters:
             game_world.remove_object(level_one_monster)
-    if time >500:
+    if time >400:
         for level_two_monster in level_two_monsters:
             game_world.remove_object(level_two_monster)
     if kirby_life<0:
         game_world.remove_object(boss_monster)
         game_world.remove_object(kirby)
-
         game_framework.change_state(dead_state)
 
     delay(0.01)

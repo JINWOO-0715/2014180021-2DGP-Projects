@@ -14,7 +14,7 @@ class Item:
         self.y = y
         self.r = 10
         self.item_type = type
-        self.velocity =velocity +4
+        self.velocity =velocity +1
         self.get_item_sound = load_wav('resource\\sound\\get_item_.wav')
         self.get_item_sound.set_volume(100)
 

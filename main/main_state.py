@@ -26,7 +26,7 @@ level_one_monster = None
 level_one_monsters = []
 level_two_monster = None
 level_two_monsters = []
-kirby_life = 50
+kirby_life = 0
 score = 0
 time = 0
 time_start_sign =False
@@ -63,7 +63,7 @@ class Back_ground:
 def enter():
     global kirby, back_ground,kirby_life ,score,time
     global level_one_monsters, boss_monster ,time_start_sign ,level_two_monsters
-    kirby_life =1
+    kirby_life =50
     back_ground = Back_ground()
     kirby = Kirby()
     level_one_monsters = [Level_one_monster_go_left() for i in range(20)]
@@ -132,7 +132,7 @@ def update():
         game_world.remove_object(boss_monster)
         game_world.remove_object(kirby)
         game_framework.change_state(dead_state)
-    if boss_monster.hp<9000:
+    if boss_monster.hp<0:
         game_world.remove_object(boss_monster)
         game_world.remove_object(kirby)
         game_framework.change_state(clear_state)
